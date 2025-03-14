@@ -6,6 +6,7 @@
 }
 
 .link{
+    padding: 20px 30px;
     text-decoration: none;
     color: black ;
 }
@@ -29,4 +30,6 @@
   .link:hover::after {
     opacity: 1;
   }
+
+
 
