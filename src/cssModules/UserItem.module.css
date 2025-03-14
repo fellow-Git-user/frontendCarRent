@@ -1,0 +1,22 @@
+
+.img{
+width: 150px;
+height: 150px;
+object-fit: cover;
+
+}
+
+.link{
+    padding: 7px 5px;
+    background-color: transparent;
+    border: 1px solid #FFC107;
+    color: #FFC107;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.link:hover{
+    background-color: #FFC107;
+    border: 1px solid white;
+    color: white;
+}

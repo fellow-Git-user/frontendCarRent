@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import { useCar } from "../../pages/CarRent/AllCarsContextProvider";
 import { Link } from "react-router";
-import classes from './ProductItem.module.css';
+import classes from "../../cssModules/ProductItem.module.css"
 
 
 type ProductItemProps = {

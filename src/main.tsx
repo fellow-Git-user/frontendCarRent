@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleCarRent from './pages/SingleCar/SingleCarRent.tsx'
 import Users from './pages/Users/Users.tsx'
 import SingleUserDisplay from './pages/SingleUser/SingleUserDisplay.tsx'
+import CreateUserPage from './pages/CreateUser/CreateUserPage.tsx'
 
 
 
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
 
           <Route path='users' element={<Users />}/>
           <Route path='users/:id' element={<SingleUserDisplay />}/>
+          <Route path='users/create' element={<CreateUserPage />}/>
 
         </Route>
       </Routes>

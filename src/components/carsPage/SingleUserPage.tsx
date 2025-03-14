@@ -29,7 +29,7 @@ const SingleUserPage: React.FC = () => {
                 Flat: {user?.address.flatNumber}, 
                 {user?.address.city}, {user?.address.country}
                 </p>
-                <Button variant="primary">Edit Profile</Button>
+                <Button variant="warning">Edit Profile</Button>
             </Col>
             </Row>
       </Container>
