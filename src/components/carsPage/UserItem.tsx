@@ -1,7 +1,7 @@
 import { User } from "../../types/types"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Button, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import classes from "./UserItem.module.css"
 import { Link } from "react-router";
 
@@ -28,7 +28,7 @@ const UserItem: React.FC<UserItemProps> = ({ data }) => {
                     <h5>{name} {surname}</h5>
                     <p className="mb-1"><strong>Email:</strong> {email}</p>
                     <p className="mb-0"><strong>Phone:</strong> {phone}</p>
-                    <Link to={`/rent/users/${id}`}>Click me for more</Link>
+                    <Link to={`/rent/users/${id}`} className={classes.link}>Click me for more</Link>
                     
                 </Col>
             </Row>
