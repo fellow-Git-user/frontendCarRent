@@ -9,7 +9,7 @@ const CreateUserPage: React.FC = () => {
 
         <div>
             <h1>New account</h1>
-            {/* <CreateUserForm /> */}
+            <CreateUserForm />
         </div>
 
         </Container>

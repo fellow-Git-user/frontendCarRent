@@ -12,7 +12,7 @@ export type Car = {
 }
 
 export type User = {
-    id: string,
+    id?: string,
     image: string,
     name: string,
     surname: string,
