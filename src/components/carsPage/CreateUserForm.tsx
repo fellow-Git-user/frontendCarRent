@@ -21,19 +21,19 @@ const CreateUserForm: React.FC = () => {
 
     let navigate = useNavigate()
 
-   const imageHandler = event => setImage(event.target.value)
-   const nameHandler = event => setName(event.target.value)
-   const surnameHandler = event => setSurname(event.target.value)
-   const phoneHandler = event => setPhone(event.target.value)
-   const streetHandler = event => setStreet(event.target.value)
-   const flatNumberHandler = event => setFlatNumber(event.target.value)
-   const cityHandler = event => setCity(event.target.value)
-   const countryHandler = event => setCountry(event.target.value)
-   const emailHandler = event => setEmail(event.target.value)
+   const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => setImage(event.target.value)
+   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)
+   const surnameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setSurname(event.target.value)
+   const phoneHandler = (event: React.ChangeEvent<HTMLInputElement>) => setPhone(event.target.value)
+   const streetHandler = (event: React.ChangeEvent<HTMLInputElement>) => setStreet(event.target.value)
+   const flatNumberHandler = (event: React.ChangeEvent<HTMLInputElement>) => setFlatNumber(event.target.value)
+   const cityHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCity(event.target.value)
+   const countryHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCountry(event.target.value)
+   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)
 
   
 
-   const submitHandler = async event => {
+   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault()
 
     if (!name || !surname || !phone || !email){
@@ -45,7 +45,7 @@ const CreateUserForm: React.FC = () => {
         image,
         name,
         surname,
-        phone,
+        phone: Number(phone),
         address: {
             street,
             flatNumber,
