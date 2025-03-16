@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from "react"
 import { useParams } from "react-router"
-import { fetchSingleUser } from "../../api/carsAPI"
+import { fetchSingleUser, updateUser } from "../../api/carsAPI"
 import { User } from "../../types/types"
 import { initialState, SingleUserActionTypes, singleUserReducer } from "./singleUserReducer"
 
@@ -10,7 +10,8 @@ type UserContextProviderProps = {
 
 interface SingleUserContextType {
         user: User | null
-        loading: boolean
+        loading: boolean,
+        editUser: (updatedUserData: User) => void
 }
     
 
@@ -22,7 +23,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
     const { id } = useParams()
     const [state, dispatch] = useReducer(singleUserReducer, initialState)
     const { user, loading } = state
-    console.log(user)
+    
 
 
     useEffect(() => {
@@ -42,9 +43,16 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
         return <p>not found</p>
     }
 
+    const editUser = async (updatedUserData: User) => {
+        await updateUser(updatedUserData)
+                
+    }
+
     const ctxValue: SingleUserContextType = {
         user,
-        loading
+        loading,
+        editUser
+        
     }
 
     
@@ -60,7 +68,7 @@ export const useSingleUser = () => {
     const ctx = useContext(SingleUserContext)
 
     if(!ctx) {
-        throw new Error('useSingleCar cannot be used outside the CarsContextProvider')
+        throw new Error('useSingleUser cannot be used outside the UserContextProvider')
     }
     return ctx
 }

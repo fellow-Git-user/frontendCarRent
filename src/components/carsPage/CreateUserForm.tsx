@@ -3,20 +3,27 @@ import SendIcon from '@mui/icons-material/Send';
 import { useState } from "react"
 import { createUser } from "../../api/carsAPI";
 import { useNavigate } from "react-router";
+import { UserFormProps } from "../../types/types";
+import { useSingleUser } from "../../pages/SingleUser/SingleUserContextProvider";
 
 
 
-const CreateUserForm: React.FC = () => {
 
-    const [image, setImage] = useState('')     
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-    const [phone, setPhone] = useState('')
-    const [street, setStreet] = useState('')
-    const [flatNumber, setFlatNumber] = useState('')
-    const [city, setCity] = useState('')
-    const [country, setCountry] = useState('')
-    const [email, setEmail] = useState('')
+
+const CreateUserForm: React.FC<UserFormProps> = ( {editUserData} ) => {
+
+    const { editUser } = useSingleUser()
+    
+
+    const [image, setImage] = useState(editUserData?.image ?? '')     
+    const [name, setName] = useState(editUserData?.name ?? '')
+    const [surname, setSurname] = useState(editUserData?.surname ?? '')
+    const [phone, setPhone] = useState(editUserData?.phone ?? '')
+    const [street, setStreet] = useState(editUserData?.address.street ?? '')
+    const [flatNumber, setFlatNumber] = useState(editUserData?.address.flatNumber ?? '')
+    const [city, setCity] = useState(editUserData?.address.city ?? '')
+    const [country, setCountry] = useState(editUserData?.address.country ?? '')
+    const [email, setEmail] = useState(editUserData?.email ?? '')
     const [error, setError] = useState('')
 
     let navigate = useNavigate()
@@ -39,7 +46,7 @@ const CreateUserForm: React.FC = () => {
     if (!name || !surname || !phone || !email){
         setError('Please note that name, surname, phone and email fields must be filled in order to create an account')
         return 
-       }
+    }
     
     const newUser = {
         image,
@@ -55,28 +62,38 @@ const CreateUserForm: React.FC = () => {
         email,
     }
 
-    try {
-        const createdUser = await createUser(newUser)
-        console.log(createdUser)
-        
-        setError('')
-        setImage('')
-        setName('')
-        setSurname('')
-        setPhone('')
-        setStreet('')
-        setFlatNumber('')
-        setCity('')
-        setCountry('')
-        setEmail('')
-        setError('')
+    if(editUserData) {
+        const updatedUserData = {...newUser, id: editUserData.id}
+        editUser(updatedUserData)
+        navigate(`/rent/users/${updatedUserData.id}`)
 
-        navigate(`/rent/users/${createdUser.id}`)
+    } else {
+        try {
+            const createdUser = await createUser(newUser)
+            console.log(createdUser)
+            
+            setError('')
+            setImage('')
+            setName('')
+            setSurname('')
+            setPhone('')
+            setStreet('')
+            setFlatNumber('')
+            setCity('')
+            setCountry('')
+            setEmail('')
+            setError('')
     
-    } catch (err) {
-        setError('Failed to create user.')
-        console.error(err)
+            navigate(`/rent/users/${createdUser.id}`)
+        
+        } catch (err) {
+            setError('Failed to create user.')
+            console.error(err)
+        }
+
     }
+
+    
     
 
    }
@@ -123,7 +140,7 @@ const CreateUserForm: React.FC = () => {
 
         {error && <Alert severity="error">{error}</Alert>}
 
-        <Button variant="contained" endIcon={<SendIcon />} type="submit">Create</Button>
+        <Button variant="contained" endIcon={<SendIcon />} type="submit">{editUserData? 'Save changes' : 'Create'}</Button>
         </form>
     )
 }

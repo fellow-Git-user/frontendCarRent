@@ -26,4 +26,8 @@ export type User = {
     email: string
 }
 
+export type UserFormProps = {
+    editUserData?: User
+}
+
     

@@ -50,7 +50,7 @@ export const createUser = async (newUserData: User): Promise<User> => {
     }
 }
 
-export const editUser = async (updatedUserData: User): Promise<User> => {
+export const updateUser = async (updatedUserData: User): Promise<User> => {
     try {
         const { data } = await axios.put(`${API_URL}/users/${updatedUserData.id}`, updatedUserData)
         return data

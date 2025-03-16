@@ -6,14 +6,34 @@ import { API_URL } from "../../utils/API_URL";
 import { Commet } from "react-loading-indicators";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import CreateUserForm from "./CreateUserForm";
 
 
 
 const SingleUserPage: React.FC = () => {
     const { user, loading } = useSingleUser()
+    
+
     const [alert, setAlert] = useState<React.ReactElement | null>(null)
+    const [ editUserMode, setEditUserMode ] = useState(false)
 
+        const [open, setOpen] = React.useState(false);
+        // const handleOpen = () => setOpen(true);
+        // const handleClose = () => setOpen(false);
 
+        const style = {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          };
 
     let navigate = useNavigate()
 
@@ -23,7 +43,7 @@ const SingleUserPage: React.FC = () => {
 
     const deleteHandler = async () => {
         try {
-            const response = await axios.delete(`${API_URL}/users/${user.id}`)
+            const response = await axios.delete(`${API_URL}/users/${user?.id}`)
         
             if(response.status === 200) {
                 setAlert(<Alert severity="success">Successfully deleted</Alert>)
@@ -45,10 +65,35 @@ const SingleUserPage: React.FC = () => {
     //     await deleteUser(user.id)
     // } 
 
+    const editUserHandler = () => {
+        
+        setEditUserMode(prevState => !prevState)
+        setOpen(true)
+    }
 
+    if (editUserMode) {
+        return (
+            <div>
+              <Modal
+                open={open}
+                onClose={editUserHandler}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                    <p>Edit your profile:</p>
+                  <CreateUserForm editUserData={user}/> 
+
+                  <Button variant="danger" onClick={editUserHandler}>Close</Button>
+                </Box>
+              </Modal>
+            </div>
+          )
+    }
 
     return(
         <Container className="mt-4">
+            {editUserMode}
             <Row className="align-items-center">
             <Col md={4} className="text-center">
                 <Image 
@@ -66,7 +111,7 @@ const SingleUserPage: React.FC = () => {
                 Flat: {user?.address.flatNumber}, 
                 {user?.address.city}, {user?.address.country}
                 </p>
-                <Button variant="warning" >Edit Profile</Button>
+                <Button variant="warning" onClick={editUserHandler}>Edit Profile</Button>
                 <Button variant="danger" onClick={deleteHandler}>Delete</Button>
                 {alert}
             </Col>
