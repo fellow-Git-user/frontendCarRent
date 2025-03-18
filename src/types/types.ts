@@ -27,7 +27,8 @@ export type User = {
 }
 
 export type UserFormProps = {
-    editUserData?: User
+    editUserData: User | null,
+    saveHandler: (updatedUserData: User) => void
 }
 
     

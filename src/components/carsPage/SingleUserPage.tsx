@@ -9,11 +9,12 @@ import { useNavigate } from "react-router";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import CreateUserForm from "./CreateUserForm";
+import { User } from "../../types/types";
 
 
 
 const SingleUserPage: React.FC = () => {
-    const { user, loading } = useSingleUser()
+    const { user, loading, editUser } = useSingleUser()
     
 
     const [alert, setAlert] = useState<React.ReactElement | null>(null)
@@ -35,7 +36,7 @@ const SingleUserPage: React.FC = () => {
             p: 4,
           };
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     if(loading) {
         return <Commet color="#5d5d5d" size="medium" text="" textColor="" />
@@ -65,6 +66,13 @@ const SingleUserPage: React.FC = () => {
     //     await deleteUser(user.id)
     // } 
 
+    const onSaveHandler = (updatedUserData: User) => {
+        editUser(updatedUserData)
+        setEditUserMode(false)
+        setOpen(false)
+    }
+
+
     const editUserHandler = () => {
         
         setEditUserMode(prevState => !prevState)
@@ -82,13 +90,13 @@ const SingleUserPage: React.FC = () => {
               >
                 <Box sx={style}>
                     <p>Edit your profile:</p>
-                  <CreateUserForm editUserData={user}/> 
+                  <CreateUserForm saveHandler={onSaveHandler} editUserData={user}/> 
 
                   <Button variant="danger" onClick={editUserHandler}>Close</Button>
                 </Box>
               </Modal>
             </div>
-          )
+        )
     }
 
     return(

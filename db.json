@@ -195,18 +195,18 @@
   ],
   "users": [
     {
-      "id": "2",
       "image": "https://media.istockphoto.com/id/870079374/photo/mmm-nah.jpg?s=612x612&w=0&k=20&c=BvTD1tE2JMzb8_vZdswqdM_lwDxUUiSKKrT6g8AEs7s=",
       "name": "Justinas",
       "surname": "Vysniauskas",
-      "phone": "067882146",
+      "phone": 67882146,
       "address": {
         "street": "Sapiegos",
         "flatNumber": "9",
         "city": "Vilnius",
         "country": "Lithuania"
       },
-      "email": "radom@gmail.com"
+      "email": "radom@gmail.com",
+      "id": "2"
     },
     {
       "id": "3",
@@ -375,6 +375,20 @@
         "country": "test"
       },
       "email": "test"
+    },
+    {
+      "id": "4c0f",
+      "image": "TEST",
+      "name": "TEST",
+      "surname": "TEST",
+      "phone": null,
+      "address": {
+        "street": "TEST",
+        "flatNumber": "TEST",
+        "city": "TEST",
+        "country": "TEST"
+      },
+      "email": "TEST"
     }
   ]
 }

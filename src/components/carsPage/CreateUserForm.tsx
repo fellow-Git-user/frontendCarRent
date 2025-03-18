@@ -4,15 +4,13 @@ import { useState } from "react"
 import { createUser } from "../../api/carsAPI";
 import { useNavigate } from "react-router";
 import { UserFormProps } from "../../types/types";
-import { useSingleUser } from "../../pages/SingleUser/SingleUserContextProvider";
 
 
 
 
 
-const CreateUserForm: React.FC<UserFormProps> = ( {editUserData} ) => {
-
-    const { editUser } = useSingleUser()
+const CreateUserForm: React.FC<UserFormProps> = ( {editUserData, saveHandler} ) => {
+    
     
 
     const [image, setImage] = useState(editUserData?.image ?? '')     
@@ -26,7 +24,7 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData} ) => {
     const [email, setEmail] = useState(editUserData?.email ?? '')
     const [error, setError] = useState('')
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
    const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => setImage(event.target.value)
    const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)
@@ -64,13 +62,11 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData} ) => {
 
     if(editUserData) {
         const updatedUserData = {...newUser, id: editUserData.id}
-        editUser(updatedUserData)
-        navigate(`/rent/users/${updatedUserData.id}`)
+        saveHandler(updatedUserData)
 
     } else {
         try {
             const createdUser = await createUser(newUser)
-            console.log(createdUser)
             
             setError('')
             setImage('')

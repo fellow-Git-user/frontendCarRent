@@ -11,7 +11,6 @@ import SingleUserDisplay from './pages/SingleUser/SingleUserDisplay.tsx'
 import CreateUserPage from './pages/CreateUser/CreateUserPage.tsx'
 
 
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
@@ -22,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='car-renting/:id' element={<SingleCarRent />}/>
 
           <Route path='users' element={<Users />}/>
+          
           <Route path='users/:id' element={<SingleUserDisplay />}/>
           <Route path='users/create' element={<CreateUserPage />}/>
 

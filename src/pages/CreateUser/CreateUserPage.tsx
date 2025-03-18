@@ -3,13 +3,16 @@ import CreateUserForm from "../../components/carsPage/CreateUserForm"
 
 
 const CreateUserPage: React.FC = () => {
+    
 
     return(
+
         <Container>
 
         <div>
             <h1>New account</h1>
-            <CreateUserForm />
+            <CreateUserForm editUserData={null} />
+            
         </div>
 
         </Container>

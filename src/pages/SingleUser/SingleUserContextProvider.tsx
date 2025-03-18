@@ -18,7 +18,7 @@ interface SingleUserContextType {
 
 export const SingleUserContext = createContext< SingleUserContextType | undefined>(undefined)
 
-export const UserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
+export const SingleUserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
 
     const { id } = useParams()
     const [state, dispatch] = useReducer(singleUserReducer, initialState)
@@ -68,7 +68,7 @@ export const useSingleUser = () => {
     const ctx = useContext(SingleUserContext)
 
     if(!ctx) {
-        throw new Error('useSingleUser cannot be used outside the UserContextProvider')
+        throw new Error('useSingleUser cannot be used outside the SingleUserContextProvider')
     }
     return ctx
 }
