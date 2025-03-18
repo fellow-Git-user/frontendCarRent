@@ -1,19 +1,19 @@
 import { Container } from "react-bootstrap"
-import { UserContextProvider } from "../../pages/SingleUser/SingleUserContextProvider"
 import SingleUserPage from "../../components/carsPage/SingleUserPage"
+import { SingleUserContextProvider } from "./SingleUserContextProvider"
 
 const SingleUserDisplay: React.FC = () => {
     
     
 
     return (
-        <UserContextProvider>
+        <SingleUserContextProvider>
 
             <Container>
                 <SingleUserPage />
             </Container>
         
-        </UserContextProvider>
+        </SingleUserContextProvider>
     )
 }
 
