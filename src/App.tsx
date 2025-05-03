@@ -3,7 +3,7 @@ import './App.css'
 function App() {
 
   return (
-    <h1>Index page</h1>
+    <h1>Home page (public)</h1>
   )
 }
 
