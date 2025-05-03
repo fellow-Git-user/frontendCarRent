@@ -1,11 +1,13 @@
 import axios from "axios"
 import { API_URL } from "../utils/API_URL"
 import { Car, User } from "../types/types"
+import apiClient from "../utils/apiClient"
+
 
 export const fetchCars = async (): Promise<Car[]> => {
     try{
-        const { data } = await axios(`${API_URL}/cars`)
-
+        const { data } = await apiClient.get('/cars')
+           
         return data
     } catch {
         throw new Error ('smth went wrong')
@@ -15,8 +17,9 @@ export const fetchCars = async (): Promise<Car[]> => {
 export const fetchSingleCar = async (id: string): Promise<Car> => {
     try{
         const { data } = await axios(`${API_URL}/cars/${id}`)
+        console.log("🚀 ~ fetchSingleCar ~ data:", data)
+        
         return data
-
     } catch{
         throw new Error ('smth went wrong')
     }
@@ -26,6 +29,7 @@ export const fetchSingleCar = async (id: string): Promise<Car> => {
 export const fetchUsers = async (): Promise<User[]> => {
     try {
         const { data } = await axios(`${API_URL}/users`)
+        console.log("🚀 ~ fetchUsers ~ data:", data)
         return data
     } catch {
         throw new Error ('smth went wrong')

@@ -21,7 +21,7 @@ const ProductsList: React.FC = () => {
         
             {carsList.map(product => (
                 
-                    <ProductItem data={product} key={product.id} />
+                    <ProductItem data={product} key={product._id} />
                 
                 ))}
 

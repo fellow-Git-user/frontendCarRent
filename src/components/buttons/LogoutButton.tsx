@@ -2,9 +2,11 @@ import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router"
 
 const LogoutButton: React.FC = () => {
+    const {logoutUser} = useAuth()
+
     const navigate = useNavigate()
     const logoutHandler = () => {
-        localStorage.removeItem('token')
+        logoutUser()
         navigate('/home/login')
     }
 

@@ -1,9 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import { useAuth } from "../../AuthContext"
 
 const LoginPage: React.FC = () => {
-
+    const { loginUser } = useAuth()
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -24,7 +25,7 @@ const LoginPage: React.FC = () => {
             console.log("🚀 ~ res:", res)
 
             if(token){
-                localStorage.setItem('token', token)
+                loginUser(token)
                 navigate('/home/profile')
             }
 

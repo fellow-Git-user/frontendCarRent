@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useReducer, } from "react"
+import { createContext, ReactNode, useContext, useEffect, useReducer, useState, } from "react"
 import { Car } from "../../types/types"
 
 import { carReducer, CartActionTypes, CartState, initialState } from "./allCarsReducer"
@@ -23,15 +23,23 @@ export const CarsContextProvider: React.FC<CarsContextProviderProps> = ({ childr
     const [state, dispatch] = useReducer(carReducer, initialState)
     const { cart, carsList, loading} = state
 
+    const [ error, setError ] = useState('')
+
 
     
 
     useEffect(() => {
         const fetchData = async() => {
-            dispatch({ type: CartActionTypes.LOADING, payload: true})
-            const carsData = await fetchCars()
-            dispatch({ type: CartActionTypes.GET_DATA, payload: carsData })
-            dispatch({ type: CartActionTypes.LOADING, payload: false})
+            try {
+                dispatch({ type: CartActionTypes.LOADING, payload: true})
+                const carsData = await fetchCars()
+                dispatch({ type: CartActionTypes.GET_DATA, payload: carsData })
+                dispatch({ type: CartActionTypes.LOADING, payload: false})
+            } catch (error: any) {
+                setError(error)
+                console.log('Failed to fetch cars', error);
+            }
+            
         }
         fetchData()
     }, [])

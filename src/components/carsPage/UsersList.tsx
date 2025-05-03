@@ -25,7 +25,7 @@ const UsersList: React.FC = () => {
         
             {usersList.map(user => (
                 
-                    <UserItem data={user} key={user.id}  />
+                    <UserItem data={user} key={user._id}  />
                 
                 ))}
 
