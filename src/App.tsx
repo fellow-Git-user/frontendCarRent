@@ -14,6 +14,8 @@ import React from 'react';
 import HomePage from './pages/HomePage/HomePage.tsx';
 import { useAuth } from './AuthContext.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
+import ROLES from './config/roles.tsx';
+import AdminPage from './pages/AdminPage/AdminPage.tsx';
 
 
 
@@ -29,10 +31,17 @@ function App() {
         <ul>
           <li> <NavLink to={'/home'}>Home</NavLink> </li>
           {user && (
-            <li> <NavLink to={'/admin/profile'}> Profile </NavLink> </li>
+            <>
+              <li> <NavLink to={'/admin/profile'}> Profile </NavLink> </li>
+              {user.role === ROLES.ADMIN && (
+                <li> <NavLink to={'/admin/admin-page'}>Admin page</NavLink> </li>
+              )}
+            </>
           )}
           <li> <NavLink to={'/rent/car-renting'}>Rent a car</NavLink> </li>
-          <li> <NavLink to={'/rent/users'}>Users</NavLink> </li>
+          {user?.role === ROLES.ADMIN && (
+              <li> <NavLink to={'/rent/users'}>Users</NavLink> </li>
+          )}
 
           {user ? (
             <LogoutButton />
@@ -68,6 +77,8 @@ function App() {
             <Route path="/admin">
               <Route index element={ <h1>ADMIN PANEL</h1> } />
               <Route path="profile" element={ <ProfilePage />} />
+              <Route path="admin-page" element={ <AdminPage />} />
+
             </Route>
           </Route>
 
