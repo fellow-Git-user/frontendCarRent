@@ -28,7 +28,9 @@ function App() {
       <nav>
         <ul>
           <li> <NavLink to={'/home'}>Home</NavLink> </li>
-          <li> <NavLink to={'/home/profile'}> Profile </NavLink> </li>
+          {user && (
+            <li> <NavLink to={'/admin/profile'}> Profile </NavLink> </li>
+          )}
           <li> <NavLink to={'/rent/car-renting'}>Rent a car</NavLink> </li>
           <li> <NavLink to={'/rent/users'}>Users</NavLink> </li>
 
@@ -49,7 +51,6 @@ function App() {
           <Route index element={<HomePage/>}/>
           <Route path="login" element={ <LoginPage />} />
           <Route path="register" element={ <RegisterPage />} />
-          <Route path="profile" element={ <ProfilePage />} />
         </Route>
 
         <Route path='rent'>
@@ -66,6 +67,7 @@ function App() {
           <Route element = {<PrivateRoute/>}> 
             <Route path="/admin">
               <Route index element={ <h1>ADMIN PANEL</h1> } />
+              <Route path="profile" element={ <ProfilePage />} />
             </Route>
           </Route>
 
