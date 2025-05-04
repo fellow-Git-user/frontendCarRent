@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router"
+import { useAuth } from "../../AuthContext"
 
 const LogoutButton: React.FC = () => {
     const {logoutUser} = useAuth()

@@ -13,13 +13,14 @@ import LogoutButton from './components/buttons/logoutButton.tsx'
 import React from 'react';
 import HomePage from './pages/HomePage/HomePage.tsx';
 import { useAuth } from './AuthContext.tsx';
+import PrivateRoute from './components/PrivateRoute.tsx';
 
 
 
 
 function App() {
-  const { token } = useAuth()
-  console.log("🚀 ~ App ~ token:", token)
+  const { user } = useAuth()
+  console.log("🚀 ~ App ~ user:", user)
 
 
   return (
@@ -27,14 +28,18 @@ function App() {
       <nav>
         <ul>
           <li> <NavLink to={'/home'}>Home</NavLink> </li>
-          {!token && (
+          <li> <NavLink to={'/home/profile'}> Profile </NavLink> </li>
+          <li> <NavLink to={'/rent/car-renting'}>Rent a car</NavLink> </li>
+          <li> <NavLink to={'/rent/users'}>Users</NavLink> </li>
+
+          {user ? (
+            <LogoutButton />
+          ) : (
             <>
               <li> <NavLink to={'/home/login'}>login </NavLink> </li>
               <li> <NavLink to={'/home/register'}>register </NavLink> </li>
             </>
           )}
-          <li> <NavLink to={'/home/profile'}> profile </NavLink> </li>
-            {token && <li> <LogoutButton /> </li>}
           
         </ul>
       </nav>
@@ -58,6 +63,12 @@ function App() {
           <Route path='users/create' element={<CreateUserPage />}/>
 
         </Route>
+
+          <Route element = {<PrivateRoute/>}>
+          
+          
+          </Route>
+
       </Routes>
     </BrowserRouter>
 
