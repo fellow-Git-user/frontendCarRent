@@ -53,7 +53,6 @@ function App() {
         </Route>
 
         <Route path='rent'>
-
           <Route path='car-renting' element={<CarRent/>}/>
           <Route path='car-renting/:id' element={<SingleCarRent />}/>
 
@@ -61,12 +60,13 @@ function App() {
           
           <Route path='users/:id' element={<SingleUserDisplay />}/>
           <Route path='users/create' element={<CreateUserPage />}/>
-
         </Route>
 
-          <Route element = {<PrivateRoute/>}>
-          
-          
+           {/* restrictintas route */}
+          <Route element = {<PrivateRoute/>}> 
+            <Route path="/admin">
+              <Route index element={ <h1>ADMIN PANEL</h1> } />
+            </Route>
           </Route>
 
       </Routes>
