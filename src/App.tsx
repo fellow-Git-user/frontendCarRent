@@ -47,8 +47,8 @@ function App() {
             <LogoutButton />
           ) : (
             <>
-              <li> <NavLink to={'/home/login'}>login </NavLink> </li>
-              <li> <NavLink to={'/home/register'}>register </NavLink> </li>
+              <li> <NavLink to={'/home/login'}>Login </NavLink> </li>
+              <li> <NavLink to={'/home/register'}>Register </NavLink> </li>
             </>
           )}
           

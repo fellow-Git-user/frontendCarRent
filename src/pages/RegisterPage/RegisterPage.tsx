@@ -34,8 +34,20 @@ const RegisterPage: React.FC = () => {
         event.preventDefault()
         
         try {
-            const userInfo = { name, email, password, surname, 
-                image, phone, street, flatNumber, city, country }
+            const userInfo = {
+                name,
+                email,
+                password,
+                surname,
+                image,
+                phone,
+                address: {
+                    street,
+                    flatNumber,
+                    city,
+                    country
+                }
+            }
             const res = await axios.post('http://localhost:3005/api/users/register', userInfo)
             
             navigate('/home/login')
