@@ -1,12 +1,12 @@
 import axios from "axios";
 import { API_URL } from "./API_URL";
 
-const apiClient = axios.create({
+const apiUser = axios.create({
     baseURL : API_URL
 
 })
 
-apiClient.interceptors.request.use(config => {
+apiUser.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
 
     if(token){
@@ -15,4 +15,4 @@ apiClient.interceptors.request.use(config => {
     return config
 })
 
-export default apiClient
+export default apiUser

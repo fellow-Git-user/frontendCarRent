@@ -1,12 +1,12 @@
 import axios from "axios"
 import { API_URL } from "../utils/API_URL"
 import { Car, User } from "../types/types"
-import apiClient from "../utils/apiClient"
+import apiUser from "../utils/apiUser"
 
 
 export const fetchCars = async (): Promise<Car[]> => {
     try{
-        const { data } = await apiClient.get('/cars')
+        const { data } = await apiUser.get('/cars')
            
         return data
     } catch {
@@ -28,7 +28,7 @@ export const fetchSingleCar = async (id: string): Promise<Car> => {
 
 export const fetchUsers = async (): Promise<User[]> => {
     try {
-        const { data } = await apiClient.get(`/users`)
+        const { data } = await apiUser.get(`/users`)
         console.log("🚀 ~ fetchUsers ~ data:", data)
         return data
     } catch {

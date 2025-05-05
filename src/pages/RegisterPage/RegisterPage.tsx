@@ -4,13 +4,29 @@ import { useNavigate } from "react-router"
 
 const RegisterPage: React.FC = () => {
 
-    const [username, setUsername] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [surname, setSurname ] = useState('')
+    const [image, setImage ] = useState('')
+    const [phone, setPhone ] = useState('')
+    const [street, setStreet ] = useState('')
+    const [flatNumber, setFlatNumber ] = useState('')
+    const [city, setCity ] = useState('')
+    const [country, setCountry ] = useState('')
 
     const navigate = useNavigate()
 
-    const usernameHandler = event => setUsername(event?.target.value)
+    const nameHandler = event => setName(event?.target.value)
+    const surnameHandler = event => setSurname(event?.target.value)
+    const imageHandler = event => setImage(event?.target.value)
+    const phoneHandler = event => setPhone(event?.target.value)
+    const streetHandler = event => setStreet(event?.target.value)
+    const flatNumberHandler = event => setFlatNumber(event?.target.value)
+    const cityHandler = event => setCity(event?.target.value)
+    const countryHandler = event => setCountry(event?.target.value)
+
+
     const emailHandler = event => setEmail(event?.target.value)
     const passwordHandler = event => setPassword(event?.target.value)
 
@@ -18,8 +34,9 @@ const RegisterPage: React.FC = () => {
         event.preventDefault()
         
         try {
-            const userInfo = { username, email, password}
-            const res = await axios.post('http://localhost:3005/api/client/register', userInfo)
+            const userInfo = { name, email, password, surname, 
+                image, phone, street, flatNumber, city, country }
+            const res = await axios.post('http://localhost:3005/api/users/register', userInfo)
             
             navigate('/home/login')
         } catch (error) {
@@ -29,16 +46,42 @@ const RegisterPage: React.FC = () => {
 
     }
 
-   
-
     return (
         <div>
             <h1>Register Page</h1>
 
             <form onSubmit={registerHandler}>
                 <div className="form-control">
-                    <label htmlFor="text" name="username" id="username" value={username}>Username: </label>
-                    <input type="text" name="username" id="username" value={username} onChange={usernameHandler} />
+                    <label htmlFor="text" name="name" id="name" value={name}>Name: </label>
+                    <input type="text" name="name" id="name" value={name} onChange={nameHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="surname" id="surname" value={surname}>Surname: </label>
+                    <input type="text" name="surname" id="surname" value={surname} onChange={surnameHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="phone" id="phone" value={phone}>Phone: </label>
+                    <input type="text" name="phone" id="phone" value={phone} onChange={phoneHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="image" id="image" value={image}>Image: </label>
+                    <input type="text" name="image" id="image" value={image} onChange={imageHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="street" id="street" value={street}>Street: </label>
+                    <input type="text" name="street" id="street" value={street} onChange={streetHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="flatNumber" id="flatNumber" value={flatNumber}>Flat or house Number: </label>
+                    <input type="text" name="flatNumber" id="flatNumber" value={flatNumber} onChange={flatNumberHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="city" id="city" value={city}>City: </label>
+                    <input type="text" name="city" id="city" value={city} onChange={cityHandler} />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="text" name="country" id="country" value={country}>Country: </label>
+                    <input type="text" name="country" id="country" value={country} onChange={countryHandler} />
                 </div>
                 <div className="form-control">
                     <label htmlFor="email" name="email" id="email" value={email}>Email: </label>
