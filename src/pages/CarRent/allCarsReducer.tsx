@@ -23,9 +23,9 @@ export enum CartActionTypes {
 
 export type CartAction = 
 |{ type: CartActionTypes.ADD_ITEM, payload: Car}
-|{ type: CartActionTypes.REMOVE_ITEM, payload: Car['id']}
+|{ type: CartActionTypes.REMOVE_ITEM, payload: Car['_id']}
 |{ type: CartActionTypes.CLEAR_CART}
-|{ type: CartActionTypes.UPDATE_QUANTITY, payload: { id: Car['id'], quantity: number}}
+|{ type: CartActionTypes.UPDATE_QUANTITY, payload: { _id: Car['_id'], quantity: number}}
 |{ type: CartActionTypes.GET_DATA, payload: Car[]}
 |{ type: CartActionTypes.LOADING, payload: boolean}
 
@@ -40,13 +40,13 @@ export const carReducer = (state: CartState, action: CartAction): CartState => {
         case CartActionTypes.ADD_ITEM: {
             const { cart } = state
             const newProduct = action.payload
-            const { id } = newProduct
+            const { _id } = newProduct
 
 
-            const existingItem = cart.find(item => item.id === id)
+            const existingItem = cart.find(item => item._id === _id)
 
             if(existingItem) {
-                const updatedCart = cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 }: item)
+                const updatedCart = cart.map(item => item._id === _id ? { ...item, quantity: item.quantity + 1 }: item)
                 return {
                     ...state,
                     cart: updatedCart
@@ -65,7 +65,7 @@ export const carReducer = (state: CartState, action: CartAction): CartState => {
         case CartActionTypes.REMOVE_ITEM: {
             return {
                 ...state,
-                cart: state.cart.filter(item => item.id !== action.payload)
+                cart: state.cart.filter(item => item._id !== action.payload)
             }
         }
         case CartActionTypes.CLEAR_CART: {
@@ -75,10 +75,10 @@ export const carReducer = (state: CartState, action: CartAction): CartState => {
             }
         }
         case CartActionTypes.UPDATE_QUANTITY: {
-            const { id, quantity } = action.payload
+            const { _id, quantity } = action.payload
 
             const updatedCart = state.cart.map(item => {
-                if (item.id === id) {
+                if (item._id === _id) {
                     return {
                         ...item,
                         quantity: quantity

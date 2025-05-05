@@ -10,9 +10,9 @@ type CarsContextProviderProps = {
 
 interface CarsContextType extends CartState {
     addProduct: (product: Car) => void
-    removeProduct: (id: Car['id']) => void
+    removeProduct: (_id: Car['_id']) => void
     clearCart: () => void
-    updateQuantity: (id: Car['id'], quantity: number) => void
+    updateQuantity: (_id: Car['_id'], quantity: number) => void
 }
 
 
@@ -46,9 +46,9 @@ export const CarsContextProvider: React.FC<CarsContextProviderProps> = ({ childr
 
 
     const addProduct = (product: Car) => dispatch({ type: CartActionTypes.ADD_ITEM, payload: product })
-    const removeProduct = (id: Car['id']) => dispatch({ type: CartActionTypes.REMOVE_ITEM, payload: id })
+    const removeProduct = (_id: Car['_id']) => dispatch({ type: CartActionTypes.REMOVE_ITEM, payload: _id })
     const clearCart = () => dispatch({ type: CartActionTypes.CLEAR_CART })
-    const updateQuantity = (id: Car['id'], quantity: number) => dispatch({ type: CartActionTypes.UPDATE_QUANTITY, payload: { id, quantity }})
+    const updateQuantity = (_id: Car['_id'], quantity: number) => dispatch({ type: CartActionTypes.UPDATE_QUANTITY, payload: { _id, quantity }})
 
     const ctxValue: CarsContextType = {
         cart,

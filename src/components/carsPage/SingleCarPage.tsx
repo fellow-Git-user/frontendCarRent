@@ -6,6 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 const SingleCarPage: React.FC = () => {
     const { car, loading } = useSingleCar()
+    console.log("🚀 ~ car:", car)
     
 
     
@@ -21,12 +22,12 @@ const SingleCarPage: React.FC = () => {
         <Carousel.Item>
             <img
             className="d-block w-100"
-            src="https://gtspirit.com/wp-content/uploads/2018/10/BMW-3-Series-G20-22.jpg"
+            src={car?.albums.firstImage}
             alt="First slide"
             />
             <Carousel.Caption>
             <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement} liter`} {car?.engine} engine.
                 It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
             </p>
             </Carousel.Caption>
@@ -39,7 +40,7 @@ const SingleCarPage: React.FC = () => {
             />
             <Carousel.Caption>
             <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement} liter`} {car?.engine} engine.
                 It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
             </p>
             </Carousel.Caption>
@@ -52,7 +53,7 @@ const SingleCarPage: React.FC = () => {
             />
             <Carousel.Caption>
             <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement} liter`} {car?.engine} engine.
                 It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
             </p>
             </Carousel.Caption>

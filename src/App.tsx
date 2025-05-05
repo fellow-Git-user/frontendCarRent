@@ -22,7 +22,7 @@ import AdminPage from './pages/AdminPage/AdminPage.tsx';
 
 function App() {
   const { user } = useAuth()
-  console.log("🚀 ~ App ~ user:", user)
+
 
 
   return (

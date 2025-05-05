@@ -20,7 +20,7 @@ const Cart: React.FC = () => {
             <h1>CART</h1>
          <div>
             {cart.map(item => (
-                <CartItem key={item.id} data={item}  />
+                <CartItem key={item._id} data={item}  />
             ))}
          </div>
          <p>Final price: {finalPrice}€</p>

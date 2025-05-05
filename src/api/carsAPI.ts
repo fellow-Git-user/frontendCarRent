@@ -16,8 +16,7 @@ export const fetchCars = async (): Promise<Car[]> => {
 
 export const fetchSingleCar = async (id: string): Promise<Car> => {
     try{
-        const { data } = await axios(`${API_URL}/cars/${id}`)
-        console.log("🚀 ~ fetchSingleCar ~ data:", data)
+        const { data } = await apiUser.get(`/cars/${id}`)
         
         return data
     } catch{

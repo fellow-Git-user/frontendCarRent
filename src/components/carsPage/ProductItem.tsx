@@ -13,24 +13,28 @@ type ProductItemProps = {
 
 const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
     const { addProduct, cart } = useCar()
-    const { brand, image, model, carMakeDate, engine, engineDisplacement, id, price} = data
-
-    const inCart = cart.find(item => item.id === id)
+    const { brand, image, model, carMakeDate, engine, engineDisplacement, _id, price} = data
+    
+    const inCart = cart.find(item => item._id === _id)
+    
 
     return (
         
-            <Col key={id}>
+            <Col key={_id}>
                 <Card>
-                    <Link to={`/rent/car-renting/${id}`}
+                    <Link to={`/rent/car-renting/${_id}`}
                     className={classes.link}>
                      <Card.Img variant="top" src={image} className={classes.img} />
                         <Card.Body>
                             <Card.Title>
                                 {brand} {model} {carMakeDate} 
-                                {typeof engineDisplacement === "string" ? "" : ` (${engineDisplacement}l)`}    {engine} </Card.Title>
+                                {engineDisplacement && engineDisplacement !== "" ? ` (${engineDisplacement}l) ` : " "}
+                                {engine}. 
+                            </Card.Title>
                             <Card.Text>
                                 For only {price}€
                             </Card.Text>
+                            
                         </Card.Body>
                     </Link>     
                     <Card.Footer>
