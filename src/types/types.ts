@@ -23,7 +23,9 @@ export type User = {
             city: string,
             country: string
         },
-    email: string
+    email: string,
+    password: string,
+    role: string
 }
 
 export type UserFormProps = {

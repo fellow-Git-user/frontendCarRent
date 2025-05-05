@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
         
         try {
             const loginInfo = { email, password}
-            const res = await axios.post('http://localhost:3005/api/client/login', loginInfo)
+            const res = await axios.post('http://localhost:3005/api/users/login', loginInfo)
             const { token } = res.data
             console.log("🚀 ~ res:", res)
 
