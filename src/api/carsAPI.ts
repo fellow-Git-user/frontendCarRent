@@ -16,8 +16,7 @@ export const fetchCars = async (): Promise<Car[]> => {
 
 export const fetchSingleCar = async (id: string): Promise<Car> => {
     try{
-        const { data } = await axios(`${API_URL}/cars/${id}`)
-        console.log("🚀 ~ fetchSingleCar ~ data:", data)
+        const { data } = await apiUser.get(`/cars/${id}`)
         
         return data
     } catch{
@@ -29,7 +28,6 @@ export const fetchSingleCar = async (id: string): Promise<Car> => {
 export const fetchUsers = async (): Promise<User[]> => {
     try {
         const { data } = await apiUser.get(`/users`)
-        console.log("🚀 ~ fetchUsers ~ data:", data)
         return data
     } catch {
         throw new Error ('smth went wrong')

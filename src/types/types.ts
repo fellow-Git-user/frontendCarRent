@@ -1,5 +1,5 @@
 export type Car = {
-    id: string
+    _id: string
     image: string,
     brand: string,
     model: string
@@ -8,7 +8,14 @@ export type Car = {
     engineDisplacement: string | number
     transmission: string
     passengerSeats: number
-    price: number
+    price: number,
+    albums?: {
+        brand: string
+        model: string
+        firstImage: string
+        secondImage: string
+        thirdImage: string
+    }
 }
 
 export type User = {

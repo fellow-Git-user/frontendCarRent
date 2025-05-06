@@ -1,65 +1,88 @@
-import { useSingleCar } from "../../pages/SingleCar/SingleCarContext"
+import { useSingleCar } from "../../pages/SingleCar/SingleCarContext";
 import Carousel from 'react-bootstrap/Carousel';
-
+import React from 'react'; 
+import classes from "../../cssModules/SingleCarPage.module.css"
 
 
 
 const SingleCarPage: React.FC = () => {
-    const { car, loading } = useSingleCar()
-    
-
-    
-    if(loading) {
-        return <p>LOADING</p>
+    const { car, loading } = useSingleCar();
+    console.log("🚀 ~ car:", car)
+  
+    if (loading) {
+      return <p>LOADING</p>;
     }
-    
-
+  
+    const carouselItems = car?.albums?.flatMap((album, albumIndex) => {
+      const items = [];
+      const keyBase = album._id || `album-${albumIndex}`;
+  
+      if (album.firstImage) {
+        items.push(
+          <Carousel.Item key={`${keyBase}-first`} className={classes.carouselItemFixedHeight}>
+            <img
+              className={`d-block w-100 ${classes.carouselImageFill}`}
+              src={album.firstImage}
+              alt={`${car?.brand} ${car?.model} - Image 1 from album ${keyBase}`}
+            />
+            <Carousel.Caption>
+              <h5>{car?.brand} {car?.model}</h5>
+            <p>This car was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
+            </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        );
+      }
+      if (album.secondImage) {
+        items.push(
+          <Carousel.Item key={`${keyBase}-second`} className={classes.carouselItemFixedHeight}>
+            <img
+              className={`d-block w-100 ${classes.carouselImageFill}`}
+              src={album.secondImage}
+              alt={`${car?.brand} ${car?.model} - Image 2 from album ${keyBase}`}
+            />
+            <Carousel.Caption>
+              <h5>{car?.brand} {car?.model}</h5>
+            <p>This car was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
+            </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        );
+      }
+      if (album.thirdImage) {
+        items.push(
+          <Carousel.Item key={`${keyBase}-third`} className={classes.carouselItemFixedHeight}>
+            <img
+              className={`d-block w-100 ${classes.carouselImageFill}`}
+              src={album.thirdImage}
+              alt={`${car?.brand} ${car?.model} - Image 3 from album ${keyBase}`}
+            />
+            <Carousel.Caption>
+              <h5>{car?.brand} {car?.model}</h5>
+            <p>This car was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
+                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
+            </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        );
+      }
+      return items;
+    }) || [];
+  
     return (
-        <div>
-            <h1>{car?.brand} {car?.model}</h1>
-                <Carousel data-bs-theme="light">
-        <Carousel.Item>
-            <img
-            className="d-block w-100"
-            src="https://gtspirit.com/wp-content/uploads/2018/10/BMW-3-Series-G20-22.jpg"
-            alt="First slide"
-            />
-            <Carousel.Caption>
-            <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
-                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
-            </p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-            <img
-            className="d-block w-100"
-            src="https://gtspirit.com/wp-content/uploads/2018/10/BMW-3-Series-G20-22.jpg"
-            alt="Second slide"
-            />
-            <Carousel.Caption>
-            <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
-                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
-            </p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-            <img
-            className="d-block w-100"
-            src="https://hips.hearstapps.com/hmg-prod/images/2019-bmw-3-series-mmp3-1552675365.jpg?crop=1.00xw:0.932xh;0,0.0550xh&resize=1200:*"
-            alt="Third slide"
-            />
-            <Carousel.Caption>
-            <h5>{car?.brand} {car?.model}</h5>
-            <p>This was made {car?.carMakeDate} and contains {typeof car?.engineDisplacement === "string" ? "" : ` ${car?.engineDisplacement}liter`} {car?.engine} engine.
-                It uses {car?.transmission} transmission and {car?.passengerSeats} passengers are allowed in a vehicle. 
-            </p>
-            </Carousel.Caption>
-        </Carousel.Item>
-        </Carousel>
-    </div>
-    )
-}
-
-export default SingleCarPage
+      <div>
+        <h1>{car?.brand} {car?.model}</h1>
+        {carouselItems.length > 0 ? (
+          <Carousel data-bs-theme="light">
+            {carouselItems}
+          </Carousel>
+        ) : (
+          <p>No images available for this car.</p>
+        )}
+      </div>
+    );
+  };
+  
+  export default SingleCarPage;

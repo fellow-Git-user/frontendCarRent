@@ -7,7 +7,7 @@ type CartProductProps = {
 }
 
 const CartItem: React.FC<CartProductProps> = ({ data }) => {
-    const { model, id, quantity, price} = data
+    const { model, _id, quantity, price} = data
     const { updateQuantity, removeProduct } = useCar()
 
     return (
@@ -15,9 +15,9 @@ const CartItem: React.FC<CartProductProps> = ({ data }) => {
             <h3>{model}</h3>
             <p>Price: {price}€</p>
             <p>Quantity: {quantity}</p>
-            <Button variant="outline-danger" size="sm"  onClick={ () => updateQuantity(id, quantity - 1)} disabled={quantity <= 1}>-</Button>
-            <Button variant="outline-success" size="sm" onClick={ () => updateQuantity(id, quantity + 1)}>+</Button>
-            <Button variant="danger" size="sm" onClick={ () => removeProduct(id)}>Remove</Button>
+            <Button variant="outline-danger" size="sm"  onClick={ () => updateQuantity(_id, quantity - 1)} disabled={quantity <= 1}>-</Button>
+            <Button variant="outline-success" size="sm" onClick={ () => updateQuantity(_id, quantity + 1)}>+</Button>
+            <Button variant="danger" size="sm" onClick={ () => removeProduct(_id)}>Remove</Button>
         </div>
     )
 }

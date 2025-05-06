@@ -23,7 +23,6 @@ export const CarContextProvider: React.FC<CarContextProviderProps> = ({ children
     const { id } = useParams()
     const [state, dispatch] = useReducer(singleCarReducer, initialState)
     const { car, loading } = state
-    console.log(car)
 
 
     useEffect(() => {
