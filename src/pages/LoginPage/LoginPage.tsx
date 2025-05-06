@@ -22,7 +22,8 @@ const LoginPage: React.FC = () => {
             const loginInfo = { email, password}
             const res = await axios.post('http://localhost:3005/api/users/login', loginInfo)
             const { token } = res.data
-            console.log("🚀 ~ res:", res)
+            console.log("🚀 ~ token:", token)
+            
 
             if(token){
                 loginUser(token)

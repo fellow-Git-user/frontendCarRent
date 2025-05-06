@@ -28,7 +28,6 @@ export const fetchSingleCar = async (id: string): Promise<Car> => {
 export const fetchUsers = async (): Promise<User[]> => {
     try {
         const { data } = await apiUser.get(`/users`)
-        console.log("🚀 ~ fetchUsers ~ data:", data)
         return data
     } catch {
         throw new Error ('smth went wrong')
