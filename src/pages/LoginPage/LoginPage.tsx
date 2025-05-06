@@ -27,12 +27,13 @@ const LoginPage: React.FC = () => {
 
             if(token){
                 loginUser(token)
-                navigate('/admin/profile')
+                navigate('/home/profile')
             }
 
             // navigate('/home/login')
         } catch (error) {
             console.log('Failed to login', error)
+            return <p>{error}</p>
         }
 
     }   

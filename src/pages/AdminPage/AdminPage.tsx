@@ -1,5 +1,9 @@
+import { Col, Container, Row } from "react-bootstrap"
 import { useAuth } from "../../AuthContext"
 import ROLES from "../../config/roles"
+import CreateAlbumForm from "../../components/adminPageForms/CreateAlbumForm"
+import CreateCarForm from "../../components/adminPageForms/CreateCarForm"
+
 
 
 const AdminPage: React.FC = () => {
@@ -14,8 +18,15 @@ const AdminPage: React.FC = () => {
 
 
     return (
+        <Container>
 
-        <div>AdminPage</div>
+            <Row>
+                <Col sm={6}> <CreateAlbumForm /> </Col>
+                <Col sm={6}> <CreateCarForm /></Col>
+            </Row>
+
+        </Container>
+        
     )
 }
 

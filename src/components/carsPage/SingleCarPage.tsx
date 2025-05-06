@@ -7,6 +7,7 @@ import classes from "../../cssModules/SingleCarPage.module.css"
 
 const SingleCarPage: React.FC = () => {
     const { car, loading } = useSingleCar();
+    console.log("🚀 ~ car:", car)
   
     if (loading) {
       return <p>LOADING</p>;

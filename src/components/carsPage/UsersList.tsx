@@ -19,7 +19,7 @@ const UsersList: React.FC = () => {
             <div >
 
                 <h1>Users</h1>
-                <Link to={`/rent/users/create`} className={classes.link}>Create your account</Link>
+                <Link to={`/admin/users/create`} className={classes.link}>Create your account</Link>
             </div>
             <Row xs={1} md={2} lg={3} className="g-4">
         

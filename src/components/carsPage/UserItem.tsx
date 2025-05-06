@@ -10,7 +10,7 @@ type UserItemProps = {
 }
 
 const UserItem: React.FC<UserItemProps> = ({ data }) => {
-        const { id, image, name, surname, email, phone } = data
+        const { _id, image, name, surname, email, phone } = data
 
 
     return (
@@ -29,7 +29,7 @@ const UserItem: React.FC<UserItemProps> = ({ data }) => {
                     <p className="mb-1"><strong>Email:</strong> {email}</p>
                     <p className="mb-0"><strong>Phone:</strong> {phone}</p>
                     <div className="d-flex justify-content-start">
-                    <Link to={`/rent/users/${id}`} className={classes.link}>Click me for more info</Link>
+                    <Link to={`/admin/users/${_id}`} className={classes.link}>Click me for more info</Link>
                     </div>
                     
                 </Col>

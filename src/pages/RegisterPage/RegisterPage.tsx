@@ -1,8 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import { useAuth } from "../../AuthContext"
 
 const RegisterPage: React.FC = () => {
+    const { loginUser } = useAuth()
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -17,20 +19,20 @@ const RegisterPage: React.FC = () => {
 
     const navigate = useNavigate()
 
-    const nameHandler = event => setName(event?.target.value)
-    const surnameHandler = event => setSurname(event?.target.value)
-    const imageHandler = event => setImage(event?.target.value)
-    const phoneHandler = event => setPhone(event?.target.value)
-    const streetHandler = event => setStreet(event?.target.value)
-    const flatNumberHandler = event => setFlatNumber(event?.target.value)
-    const cityHandler = event => setCity(event?.target.value)
-    const countryHandler = event => setCountry(event?.target.value)
+    const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setName(event?.target.value)
+    const surnameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setSurname(event?.target.value)
+    const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => setImage(event?.target.value)
+    const phoneHandler = (event: React.ChangeEvent<HTMLInputElement>) => setPhone(event?.target.value)
+    const streetHandler = (event: React.ChangeEvent<HTMLInputElement>) => setStreet(event?.target.value)
+    const flatNumberHandler = (event: React.ChangeEvent<HTMLInputElement>) => setFlatNumber(event?.target.value)
+    const cityHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCity(event?.target.value)
+    const countryHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCountry(event?.target.value)
 
 
-    const emailHandler = event => setEmail(event?.target.value)
-    const passwordHandler = event => setPassword(event?.target.value)
+    const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event?.target.value)
+    const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)
 
-    const registerHandler = async event => {
+    const registerHandler = async (event: React.FormEvent)  => {
         event.preventDefault()
         
         try {
@@ -39,6 +41,7 @@ const RegisterPage: React.FC = () => {
                 email,
                 password,
                 surname,
+
                 image,
                 phone,
                 address: {
@@ -50,7 +53,9 @@ const RegisterPage: React.FC = () => {
             }
             const res = await axios.post('http://localhost:3005/api/users/register', userInfo)
             
-            navigate('/home/login')
+
+            loginUser(token)            
+            navigate('/home/profile')
         } catch (error) {
 
             console.log('Failed to register', error)
