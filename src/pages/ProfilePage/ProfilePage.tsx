@@ -102,7 +102,7 @@ const ProfilePage: React.FC = () => {
                     <input type="text" name="name" id="name" value={name} onChange={nameHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="surnameext" >Surname: </label>
+                    <label htmlFor="surname" >Surname: </label>
                     <input type="text" name="surname" id="surname" value={surname} onChange={surnameHandler} />
                 </div>
                 <div className="form-control">

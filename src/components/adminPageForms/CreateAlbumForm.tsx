@@ -62,27 +62,27 @@ const CreateAlbumForm: React.FC = () => {
                <Form onSubmit={createCarHandler}>
                
                    <div className="form-control">
-                       <label htmlFor="text" name="carBrand" id="carBrand" value={carBrand}>Brand: </label>
+                       <label htmlFor="carBrand" >Brand: </label>
                        <input type="text" name="carBrand" id="carBrand" value={carBrand} onChange={carBrandHandler} />
                    </div>
                    <div className="form-control">
-                       <label htmlFor="text" name="carModel" id="carModel" value={carModel}>Model: </label>
+                       <label htmlFor="carModel"  >Model: </label>
                        <input type="text" name="carModel" id="carModel" value={carModel} onChange={carModelHandler} />
                    </div>
                    <div className="form-control">
-                       <label htmlFor="number" name="carManufactureDate" id="carManufactureDate" value={carManufactureDate}>Car manufacture date: </label>
+                       <label htmlFor="carManufactureDate" >Car manufacture date: </label>
                        <input type="number" name="carManufactureDate" id="carManufactureDate" value={carManufactureDate} onChange={carManufactureDateHandler} />
                    </div>
                    <div className="form-control">
-                       <label htmlFor="text" name="firstImage" id="firstImage" value={firstImage}>First image: </label>
+                       <label htmlFor="firstImage" >First image: </label>
                        <input type="text" name="firstImage" id="firstImage" value={firstImage} onChange={firstImageHandler} />
                    </div>
                    <div className="form-control">
-                       <label htmlFor="text" name="secondImage" id="secondImage" value={secondImage}>Second image: </label>
+                       <label htmlFor="secondImage"  >Second image: </label>
                        <input type="text" name="secondImage" id="secondImage" value={secondImage} onChange={secondImageHandler} />
                    </div>
                    <div className="form-control">
-                       <label htmlFor="text" name="thirdImage" id="thirdImage" value={thirdImage}>Third image: </label>
+                       <label htmlFor="thirdImage"  >Third image: </label>
                        <input type="text" name="thirdImage" id="thirdImage" value={thirdImage} onChange={thirdImageHandler} />
                    </div>
                       

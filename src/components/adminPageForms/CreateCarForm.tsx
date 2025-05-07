@@ -15,6 +15,8 @@ const CreateCarForm: React.FC = () => {
     const [ price, setPrice ] = useState('')
     const [ albums, setAlbums ] = useState<string[]>([])
     const [albumsInput, setAlbumsInput] = useState('')
+    const [message, setMessage] = useState<string | null>(null); // Add state for message
+
 
 
     const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => setImage(event?.target.value)
@@ -34,6 +36,8 @@ const CreateCarForm: React.FC = () => {
 
     const createCarHandler = async (event: React.FormEvent)  => {
         event.preventDefault()
+        setMessage('Submitting...');
+
         try {
             const carData = {
                 brand,
@@ -46,15 +50,31 @@ const CreateCarForm: React.FC = () => {
                 passengerSeats,
                 price,
                 albums
+            };
 
+            const res = await apiUser.post('/cars/create', carData);
+            if(res.status >= 200 && res.status < 300){
+                setMessage('Car created successfully!');
+                setImage('');
+                setBrand('');
+                setModel('');
+                setCarMakeDate('');
+                setEngine('');
+                setEngineDisplacement('');
+                setTransmission('');
+                setPassengerSeats('');
+                setPrice('');
+                setAlbums([]);
+                setAlbumsInput('');
             }
-            
-            
-            const res = await apiUser.post('/cars/create', carData)  
-    
-        } catch (error) {
+            else{
+                setMessage('Failed to create car');
+            }
 
-            console.log('Failed to register', error)
+
+        } catch (error: any) {
+            setMessage(error.response?.data?.message || 'An unexpected error occurred.'); // Set error message
+            console.error('Failed to register', error);
         }
 
     }
@@ -66,46 +86,47 @@ const CreateCarForm: React.FC = () => {
     return (
         <div>
             <p>Create car</p>
+            {message && <p>{message}</p>}
             <Form onSubmit={createCarHandler}>
             
                 <div className="form-control">
-                    <label htmlFor="text" name="image" id="image" value={image}>Image: </label>
+                    <label htmlFor="image" >Image: </label>
                     <input type="text" name="image" id="image" value={image} onChange={imageHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="brand" id="brand" value={brand}>Brand: </label>
+                    <label htmlFor="brand" >Brand: </label>
                     <input type="text" name="brand" id="brand" value={brand} onChange={brandHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="model" id="model" value={model}>Model: </label>
+                    <label htmlFor="model" >Model: </label>
                     <input type="text" name="model" id="model" value={model} onChange={modelHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="number" name="carMakeDate" id="carMakeDate" value={carMakeDate}>Car manufacture date: </label>
+                    <label htmlFor="carMakeDate"  >Car manufacture date: </label>
                     <input type="number" name="carMakeDate" id="carMakeDate" value={carMakeDate} onChange={carMakeDateHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="engine" id="engine" value={engine}>Engine: </label>
+                    <label htmlFor="engine" >Engine: </label>
                     <input type="text" name="engine" id="engine" value={engine} onChange={engineHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="number" name="engineDisplacement" id="engineDisplacement" value={engineDisplacement}>Engine displacement: </label>
+                    <label htmlFor="engineDisplacement" >Engine displacement: </label>
                     <input type="number" name="engineDisplacement" id="engineDisplacement" value={engineDisplacement} onChange={engineDisplacementHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="transmission" id="transmission" value={transmission}>Transmission: </label>
+                    <label htmlFor="transmission" >Transmission: </label>
                     <input type="text" name="transmission" id="transmission" value={transmission} onChange={transmissionHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="number" name="passengerSeats" id="passengerSeats" value={passengerSeats}>Number of passenger seats: </label>
+                    <label htmlFor="passengerSeats" >Number of passenger seats: </label>
                     <input type="number" name="passengerSeats" id="passengerSeats" value={passengerSeats} onChange={passengerSeatsHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="number" name="price" id="price" value={price}>Price: </label>
+                    <label htmlFor="price"  >Price: </label>
                     <input type="number" name="price" id="price" value={price} onChange={priceHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="albums" id="albums" value={albums}>Albums: </label>
+                    <label htmlFor="albums" >Albums: </label>
                     <input type="text" name="albums" id="albums" value={albumsInput} onChange={albumsHandler} />
                 </div>
 

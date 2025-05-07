@@ -60,6 +60,20 @@ export interface ReviewFormProps {
     onSubmit: (data: ReviewFormValues) => void;
 }
 
+export interface UserInfo {
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    image: string;
+    phone: string;
+    address: {
+        street: string;
+        flatNumber: string;
+        city: string;
+        country: string;
+    };
+}
 
 
     

@@ -2,6 +2,9 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useAuth } from "../../AuthContext"
+import apiUser from "../../utils/apiUser"
+import { UserInfo } from "../../types/types"
+import { jwtDecode } from "jwt-decode"
 
 const RegisterPage: React.FC = () => {
     const { loginUser } = useAuth()
@@ -16,6 +19,8 @@ const RegisterPage: React.FC = () => {
     const [flatNumber, setFlatNumber ] = useState('')
     const [city, setCity ] = useState('')
     const [country, setCountry ] = useState('')
+    const [error, setError] = useState<string | null>(null);
+
 
     const navigate = useNavigate()
 
@@ -35,13 +40,12 @@ const RegisterPage: React.FC = () => {
     const registerHandler = async (event: React.FormEvent)  => {
         event.preventDefault()
         
-        try {
-            const userInfo = {
+        
+            const userInfo: UserInfo = {
                 name,
                 email,
                 password,
                 surname,
-
                 image,
                 phone,
                 address: {
@@ -50,16 +54,23 @@ const RegisterPage: React.FC = () => {
                     city,
                     country
                 }
+            }            
+            try {
+                const res = await apiUser.post('/users/register', userInfo);
+    
+                if (res.status >= 200 && res.status < 300) {
+                    const token = res.data.token;
+                    const decoded = jwtDecode(token);
+                    loginUser(token);
+                    navigate('/home/profile');
+                } else {
+                    setError(res.data.message || 'Registration failed. Please try again.');
+                    console.error('Registration failed:', res.data);
+                }
+            } catch (error: any) {
+                setError(error.response?.data?.message || 'An unexpected error occurred.');
+                console.error('Failed to register', error);
             }
-            const res = await axios.post('http://localhost:3005/api/users/register', userInfo)
-            
-
-            loginUser(token)            
-            navigate('/home/profile')
-        } catch (error) {
-
-            console.log('Failed to register', error)
-        }
 
     }
 
@@ -69,43 +80,43 @@ const RegisterPage: React.FC = () => {
 
             <form onSubmit={registerHandler}>
                 <div className="form-control">
-                    <label htmlFor="text" name="name" id="name" value={name}>Name: </label>
+                    <label htmlFor="name" >Name: </label>
                     <input type="text" name="name" id="name" value={name} onChange={nameHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="surname" id="surname" value={surname}>Surname: </label>
+                    <label htmlFor="surname" >Surname: </label>
                     <input type="text" name="surname" id="surname" value={surname} onChange={surnameHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="phone" id="phone" value={phone}>Phone: </label>
+                    <label htmlFor="phone" >Phone: </label>
                     <input type="text" name="phone" id="phone" value={phone} onChange={phoneHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="image" id="image" value={image}>Image: </label>
+                    <label htmlFor="image" >Image: </label>
                     <input type="text" name="image" id="image" value={image} onChange={imageHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="street" id="street" value={street}>Street: </label>
+                    <label htmlFor="street" >Street: </label>
                     <input type="text" name="street" id="street" value={street} onChange={streetHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="flatNumber" id="flatNumber" value={flatNumber}>Flat or house Number: </label>
+                    <label htmlFor="flatNumber" >Flat or house Number: </label>
                     <input type="text" name="flatNumber" id="flatNumber" value={flatNumber} onChange={flatNumberHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="city" id="city" value={city}>City: </label>
+                    <label htmlFor="city" >City: </label>
                     <input type="text" name="city" id="city" value={city} onChange={cityHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="country" id="country" value={country}>Country: </label>
+                    <label htmlFor="country" >Country: </label>
                     <input type="text" name="country" id="country" value={country} onChange={countryHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="email" name="email" id="email" value={email}>Email: </label>
+                    <label htmlFor="email" >Email: </label>
                     <input type="email" name="email" id="email" value={email} onChange={emailHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="password" name="password" id="password" value={password}>Password: </label>
+                    <label htmlFor="password" >Password: </label>
                     <input type="password" name="password" id="password" value={password} onChange={passwordHandler} />
                 </div>
 

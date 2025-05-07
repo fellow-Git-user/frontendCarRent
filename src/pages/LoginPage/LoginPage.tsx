@@ -44,11 +44,11 @@ const LoginPage: React.FC = () => {
 
             <form onSubmit={loginHandler}>
                 <div className="form-control">
-                    <label htmlFor="email" name="email" id="email" value={email}>Email: </label>
+                    <label htmlFor="email" >Email: </label>
                     <input type="email" name="email" id="email" value={email} onChange={emailHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="password" name="password" id="password" value={password}>Password: </label>
+                    <label htmlFor="password"  >Password: </label>
                     <input type="password" name="password" id="password" value={password} onChange={passwordHandler} />
                 </div>
 

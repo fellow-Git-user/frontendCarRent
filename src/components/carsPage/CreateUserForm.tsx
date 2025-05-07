@@ -80,7 +80,7 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData, saveHandler} ) 
             setEmail('')
             setError('')
     
-            navigate(`/rent/users/${createdUser.id}`)
+            navigate(`/admin/users/${createdUser._id}`)
         
         } catch (err) {
             setError('Failed to create user.')
