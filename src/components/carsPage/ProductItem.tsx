@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { useCar } from "../../pages/CarRent/AllCarsContextProvider";
 import { Link } from "react-router";
 import classes from "../../cssModules/ProductItem.module.css"
+import { useAuth } from "../../AuthContext";
 
 
 type ProductItemProps = {
@@ -13,6 +14,7 @@ type ProductItemProps = {
 
 const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
     const { addProduct, cart } = useCar()
+    const { user } = useAuth()
     const { brand, image, model, carMakeDate, engine, engineDisplacement, _id, price} = data
     
     const inCart = cart.find(item => item._id === _id)
@@ -31,9 +33,16 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
                                 {engineDisplacement && engineDisplacement !== "" ? ` (${engineDisplacement}l) ` : " "}
                                 {engine}. 
                             </Card.Title>
-                            <Card.Text>
+                            {user ? (
+                                <Card.Text>
                                 For only {price}€
                             </Card.Text>
+                            ) : (
+                            <Card.Text>
+                                Log in or register to see prices
+                            </Card.Text>
+                            ) }
+                            
                             
                         </Card.Body>
                     </Link>     
