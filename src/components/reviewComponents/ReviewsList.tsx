@@ -5,30 +5,7 @@ import { Grid2, Typography } from '@mui/material';
 import SingleReview from './SingleReview'; // Import the SingleReview component
 import apiUser from '../../utils/apiUser';
 
-// // Mock review data (replace with actual data fetching)
-// const mockReviews = {
-//     "681b1ef5365cef9fb5c83bd5": {
-//         _id: "681b1ef5365cef9fb5c83bd5",
-//         user: { name: "John Doe" },
-//         comment: "Great car! I loved the handling.",
-//         rating: 5,
-//         createdAt: "2024-07-28T12:00:00Z"
-//     },
-//     "681b26fb6168a241d4b2da4a": {
-//         _id: "681b26fb6168a241d4b2da4a",
-//         user: { name: "Jane Smith" },
-//         comment: "The interior was very comfortable.",
-//         rating: 4,
-//         createdAt: "2024-07-27T10:30:00Z"
-//     },
-//     "some-non-existent-id": {
-//         _id: "some-non-existent-id",
-//         user: {name: "Invalid User"},
-//         comment: "This review should not be shown",
-//         rating: 1,
-//         createdAt: "2025-01-01T00:00:00Z"
-//     }
-// };
+
 
 const ReviewsList: React.FC = () => {
     const { car, loading } = useSingleCar();
