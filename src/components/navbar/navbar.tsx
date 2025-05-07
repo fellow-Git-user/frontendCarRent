@@ -6,18 +6,6 @@ import ROLES from '../../config/roles.tsx';
 import LogoutButton from '../buttons/logoutButton.tsx';
 
 
-// Mock user and ROLES for demonstration
-// const user = {
-//   name: 'John Doe',
-//   role: 'ADMIN',
-// };
-// const ROLES = {
-//   ADMIN: 'ADMIN',
-//   USER: 'USER',
-// };
-
-
-
 const NavBar = () => {
     const {logoutUser, user} = useAuth()
      
@@ -34,8 +22,8 @@ const NavBar = () => {
                   color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                   textDecoration: 'none',
                   '&:hover': { color: '#fff' },
-                  fontWeight: isActive ? '600' : '400', // added font weight
-                  display: 'flex', // Added for icon alignment
+                  fontWeight: isActive ? '600' : '400', 
+                  display: 'flex', 
                   alignItems: 'center'
                 })}
               >
@@ -51,8 +39,8 @@ const NavBar = () => {
                       color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                       textDecoration: 'none',
                       '&:hover': { color: '#fff' },
-                      fontWeight: isActive ? '600' : '400', // added font weight
-                      display: 'flex', // Added for icon alignment
+                      fontWeight: isActive ? '600' : '400', 
+                      display: 'flex', 
                       alignItems: 'center'
                     })}
                   >
@@ -67,8 +55,8 @@ const NavBar = () => {
                         color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                         textDecoration: 'none',
                         '&:hover': { color: '#fff' },
-                        fontWeight: isActive ? '600' : '400', // added font weight
-                        display: 'flex', // Added for icon alignment
+                        fontWeight: isActive ? '600' : '400', 
+                        display: 'flex', 
                         alignItems: 'center'
                       })}
                     >
@@ -85,8 +73,8 @@ const NavBar = () => {
                   color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                   textDecoration: 'none',
                   '&:hover': { color: '#fff' },
-                  fontWeight: isActive ? '600' : '400',  // added font weight
-                  display: 'flex', // Added for icon alignment
+                  fontWeight: isActive ? '600' : '400',  
+                  display: 'flex', 
                   alignItems: 'center'
                 })}
               >
@@ -101,8 +89,8 @@ const NavBar = () => {
                     color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                     textDecoration: 'none',
                     '&:hover': { color: '#fff' },
-                    fontWeight: isActive ? '600' : '400', // added font weight
-                    display: 'flex', // Added for icon alignment
+                    fontWeight: isActive ? '600' : '400', 
+                    display: 'flex', 
                     alignItems: 'center'
                   })}
                 >
@@ -124,8 +112,8 @@ const NavBar = () => {
                       color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                       textDecoration: 'none',
                       '&:hover': { color: '#fff' },
-                      fontWeight: isActive ? '600' : '400', // added font weight
-                      display: 'flex', // Added for icon alignment
+                      fontWeight: isActive ? '600' : '400', 
+                      display: 'flex', 
                       alignItems: 'center'
                     })}
                   >
@@ -139,8 +127,8 @@ const NavBar = () => {
                       color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.7)',
                       textDecoration: 'none',
                       '&:hover': { color: '#fff' },
-                      fontWeight: isActive ? '600' : '400', // added font weight
-                      display: 'flex', // Added for icon alignment
+                      fontWeight: isActive ? '600' : '400', 
+                      display: 'flex', 
                       alignItems: 'center'
                     })}
                   >

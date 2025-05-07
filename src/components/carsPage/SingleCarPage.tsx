@@ -2,12 +2,13 @@ import { useSingleCar } from "../../pages/SingleCar/SingleCarContext";
 import Carousel from 'react-bootstrap/Carousel';
 import React from 'react'; 
 import classes from "../../cssModules/SingleCarPage.module.css"
+import ReviewsComponent from "../reviewComponents/ReviewsComponent";
 
 
 
 const SingleCarPage: React.FC = () => {
     const { car, loading } = useSingleCar();
-    console.log("🚀 ~ car:", car)
+    
   
     if (loading) {
       return <p>LOADING</p>;
@@ -70,18 +71,21 @@ const SingleCarPage: React.FC = () => {
       }
       return items;
     }) || [];
-  
+    console.log("🚀 ~ car:", car)
     return (
-      <div>
-        <h1>{car?.brand} {car?.model}</h1>
-        {carouselItems.length > 0 ? (
-          <Carousel data-bs-theme="light">
-            {carouselItems}
-          </Carousel>
-        ) : (
-          <p>No images available for this car.</p>
-        )}
-      </div>
+
+        <div>
+          <h1>{car?.brand} {car?.model}</h1>
+          {carouselItems.length > 0 ? (
+            <Carousel data-bs-theme="light">
+              {carouselItems}
+            </Carousel>
+          ) : (
+            <p>No images available for this car.</p>
+          )}
+        </div>
+          
+
     );
   };
   

@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap"
-import { useCar } from "../pages/CarRent/AllCarsContextProvider"
+import { useCar } from "../../pages/CarRent/AllCarsContextProvider"
 import CartItem from "./CartItem"
 
 const Cart: React.FC = () => {

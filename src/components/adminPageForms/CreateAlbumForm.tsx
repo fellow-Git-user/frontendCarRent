@@ -42,7 +42,7 @@ const CreateAlbumForm: React.FC = () => {
                const res = await apiUser.post('/albums/create', AlbumCarData)
                
                if (res.data && res.data._id) {
-                setCreatedAlbumId(res.data._id); // Store the ID in state
+                setCreatedAlbumId(res.data._id);
                 console.log('Album created with ID:', res.data._id);
             } else {
                 console.error('Album creation successful, but ID not found in response');

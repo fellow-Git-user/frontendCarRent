@@ -11,23 +11,36 @@ import apiUser from "../../utils/apiUser"
 const ProfilePage: React.FC = () => {
     const { user, loading, logoutUser, updateUser} = useAuth()
 
-    const [ name, setName ] = useState(user.name)
-    const [email, setEmail] = useState(user.email)
-    const [password, setPassword] = useState(user.password)
-    const [surname, setSurname ] = useState(user.surname)
-    const [image, setImage ] = useState(user.image)
-    const [phone, setPhone ] = useState(user.phone)
-    const [street, setStreet ] = useState(user.street)
-    const [flatNumber, setFlatNumber ] = useState(user.flatNumber)
-    const [city, setCity ] = useState(user.city)
-    const [country, setCountry ] = useState(user.country)
+    const [ name, setName ] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [surname, setSurname ] = useState('')
+    const [image, setImage ] = useState('')
+    const [phone, setPhone ] = useState('')
+    const [street, setStreet ] = useState('')
+    const [flatNumber, setFlatNumber ] = useState('')
+    const [city, setCity ] = useState('')
+    const [country, setCountry ] = useState('')
+
+   
 
 
     useEffect(() => {
-        if (user && user.exp * 1000 < Date.now()) {
-            logoutUser();
+        if (user) {
+            setName(user.name)
+            setEmail(user.email)
+            setPassword(user.password)
+            setSurname(user.surname)
+            setImage(user.image)
+            setPhone(user.phone)
+            setStreet(user.street)
+            setFlatNumber(user.flatNumber)
+            setCity(user.city)
+            setCountry(user.country)
         }
-        }, [user, logoutUser]);
+    }, [user])
+
+
     
         if(loading) {
         return <Commet color="#5d5d5d" size="medium" text="" textColor="" />
@@ -85,43 +98,43 @@ const ProfilePage: React.FC = () => {
             <Form onSubmit={submitHandler}>
 
             <div className="form-control">
-                    <label htmlFor="text" name="name" id="name" value={name}>Name: </label>
+                    <label htmlFor="name" >Name: </label>
                     <input type="text" name="name" id="name" value={name} onChange={nameHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="surname" id="surname" value={surname}>Surname: </label>
+                    <label htmlFor="surnameext" >Surname: </label>
                     <input type="text" name="surname" id="surname" value={surname} onChange={surnameHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="phone" id="phone" value={phone}>Phone: </label>
+                    <label htmlFor="phone" >Phone: </label>
                     <input type="text" name="phone" id="phone" value={phone} onChange={phoneHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="image" id="image" value={image}>Image: </label>
+                    <label htmlFor="image">Image: </label>
                     <input type="text" name="image" id="image" value={image} onChange={imageHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="street" id="street" value={street}>Street: </label>
+                    <label htmlFor="street">Street: </label>
                     <input type="text" name="street" id="street" value={street} onChange={streetHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="flatNumber" id="flatNumber" value={flatNumber}>Flat Number: </label>
+                    <label htmlFor="flatNumber">Flat Number: </label>
                     <input type="text" name="flatNumber" id="flatNumber" value={flatNumber} onChange={flatNumberHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="city" id="city" value={city}>City: </label>
+                    <label htmlFor="city" >City: </label>
                     <input type="text" name="city" id="city" value={city} onChange={cityHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="text" name="country" id="country" value={country}>Country: </label>
+                    <label htmlFor="country">Country: </label>
                     <input type="text" name="country" id="country" value={country} onChange={countryHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="email" name="email" id="email" value={email}>Email: </label>
+                    <label htmlFor="email">Email: </label>
                     <input type="email" name="email" id="email" value={email} onChange={emailHandler} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="password" name="password" id="password" value={password}>Password: </label>
+                    <label htmlFor="password">Password: </label>
                     <input type="password" name="password" id="password" value={password} onChange={passwordHandler} />
                 </div>
 

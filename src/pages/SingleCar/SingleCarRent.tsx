@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap"
 import { CarContextProvider } from "./SingleCarContext"
 import SingleCarPage from "../../components/carsPage/SingleCarPage"
+import ReviewsComponent from "../../components/reviewComponents/ReviewsComponent"
 
 
 const SingleCarRent: React.FC = () => {
@@ -11,6 +12,7 @@ const SingleCarRent: React.FC = () => {
 
             <Container>
                 <SingleCarPage  />
+                <ReviewsComponent />
             </Container>
 
         </CarContextProvider>
