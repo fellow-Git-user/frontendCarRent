@@ -20,7 +20,7 @@ export type Car = {
 }
 
 export type User = {
-    id?: string,
+    _id?: string,
     image: string,
     name: string,
     surname: string,
@@ -43,7 +43,7 @@ export type UserFormProps = {
 
 export interface SingleReviewProps {
     review: 
-    _id: string;
+    _id?: string;
     title: string;     
     comment: string;     
     rating: number;

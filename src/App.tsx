@@ -14,6 +14,7 @@ import { useAuth } from './AuthContext.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import AdminPage from './pages/AdminPage/AdminPage.tsx';
 import NavBar from './components/navbar/navbar.tsx';
+import Footer from './pages/Footer/Footer.tsx';
 
 
 
@@ -26,33 +27,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <nav>
-        <ul>
-          <li> <NavLink to={'/home'}>Home</NavLink> </li>
-          {user && (
-            <>
-              <li> <NavLink to={'/home/profile'}> Profile </NavLink> </li>
-              {user.role === ROLES.ADMIN && (
-                <li> <NavLink to={'/admin/admin-page'}>Admin page</NavLink> </li>
-              )}
-            </>
-          )}
-          <li> <NavLink to={'/rent/car-renting'}>Rent a car</NavLink> </li>
-          {user?.role === ROLES.ADMIN && (
-              <li> <NavLink to={'/admin/users'}>Users</NavLink> </li>
-          )}
-
-          {user ? (
-            <LogoutButton />
-          ) : (
-            <>
-              <li> <NavLink to={'/home/login'}>Login </NavLink> </li>
-              <li> <NavLink to={'/home/register'}>Register </NavLink> </li>
-            </>
-          )}
-          
-        </ul>
-      </nav> */}
 
       <NavBar />
         
@@ -85,6 +59,7 @@ function App() {
           </Route>
 
       </Routes>
+      <Footer/>
     </BrowserRouter>
 
   )

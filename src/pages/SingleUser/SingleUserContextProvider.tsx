@@ -21,6 +21,7 @@ export const SingleUserContext = createContext< SingleUserContextType | undefine
 export const SingleUserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
 
     const { id } = useParams()
+    
     const [state, dispatch] = useReducer(singleUserReducer, initialState)
     const { user, loading } = state
     
@@ -44,6 +45,7 @@ export const SingleUserContextProvider: React.FC<UserContextProviderProps> = ({ 
     }
 
     const editUser = async (updatedUserData: User) => {
+        console.log("🚀 ~ editUser ~ updatedUserData:", updatedUserData)
         await updateUser(updatedUserData)
                 
     }
