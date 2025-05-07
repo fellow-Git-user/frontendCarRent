@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar, Box } from '@mui/material';
-import { MessageRounded } from '@mui/icons-material';
+import { Card, CardContent, CardHeader, Typography, Avatar, Rating } from '@mui/material';
 import { SingleReviewProps } from '../../types/types';
 
 
@@ -12,28 +11,25 @@ const SingleReview: React.FC<SingleReviewProps> = ({ review }) => {
     );
 
     return (
-        <Card elevation={2} sx={{  transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)' } }}>
+        <Card sx={{ mb: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ backgroundColor: '#b3e5fc', color: '#0288d1' }}>
-                        <MessageRounded />
-                    </Avatar>
+                    <Avatar
+                        alt={review.user.name}
+                        src={review.user.image || "https://via.placeholder.com/40"}
+                        sx={{ width: 40, height: 40 }}
+                    />
                 }
-                title={
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#222' }}>
-                            {review.user.name}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                            {formattedDate} - {review.rating} / 5
-                        </Typography>
-                    </Box>
-                }
-
+                title={review.user.name}
+                subheader={formattedDate}
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: '1.5' }}>
-                    {review.comment}
+                <Typography variant="h6" component="h4" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+                    {review.title}  
+                </Typography>
+                <Rating value={review.rating} readOnly precision={1} sx={{ mb: 1 }} />
+                <Typography variant="body2" color="text.secondary">
+                    {review.comment}  
                 </Typography>
             </CardContent>
         </Card>
