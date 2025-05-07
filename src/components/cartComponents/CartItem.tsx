@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap"
-import { CartProduct } from "../pages/CarRent/allCarsReducer"
-import { useCar } from "../pages/CarRent/AllCarsContextProvider"
+import { CartProduct } from "../../pages/CarRent/allCarsReducer"
+import { useCar } from "../../pages/CarRent/AllCarsContextProvider"
 
 type CartProductProps = {
     data: CartProduct

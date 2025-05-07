@@ -1,7 +1,7 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Container } from "react-bootstrap"
-import Cart from "../../components/Cart"
+import Cart from "../../components/cartComponents/Cart"
 import ProductsList from "../../components/carsPage/ProductsList"
 import { CarsContextProvider } from "./AllCarsContextProvider"
 

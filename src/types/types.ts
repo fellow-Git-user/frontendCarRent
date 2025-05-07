@@ -15,7 +15,8 @@ export type Car = {
         firstImage: string
         secondImage: string
         thirdImage: string
-    }
+    },
+    reviews: string[]
 }
 
 export type User = {
@@ -38,6 +39,16 @@ export type User = {
 export type UserFormProps = {
     editUserData: User | null,
     saveHandler: (updatedUserData: User) => void
+}
+
+export interface SingleReviewProps {
+    review: {
+        _id: string;
+        user: { name: string };
+        comment: string;
+        rating: number;
+        createdAt: string;
+    };
 }
 
     
