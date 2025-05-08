@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import CreateUserForm from "./CreateUserForm";
 import { User } from "../../types/types";
+import { useAuth } from "../../AuthContext";
+import apiUser from "../../utils/apiUser";
 
 
 
@@ -44,7 +46,7 @@ const SingleUserPage: React.FC = () => {
 
     const deleteHandler = async () => {
         try {
-            const response = await axios.delete(`${API_URL}/users/${user?.id}`)
+            const response = await apiUser.delete(`/users/${user?.id}`)
         
             if(response.status === 200) {
                 setAlert(<Alert severity="success">Successfully deleted</Alert>)
@@ -115,9 +117,9 @@ const SingleUserPage: React.FC = () => {
                 <p><strong>Email:</strong> {user?.email}</p>
                 <p><strong>Phone:</strong> {user?.phone}</p>
                 <p><strong>Address: </strong>
-                {user?.address?.street}, 
-                Flat: {user?.address.flatNumber}, 
-                {user?.address.city}, {user?.address.country}
+                {user?.street}, 
+                Flat: {user?.flatNumber}, 
+                {user?.city}, {user?.country}
                 </p>
                 <Button variant="warning" onClick={editUserHandler}>Edit Profile</Button>
                 <Button variant="danger" onClick={deleteHandler}>Delete</Button>

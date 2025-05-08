@@ -15,12 +15,12 @@ const SingleReview: React.FC<SingleReviewProps> = ({ review }) => {
             <CardHeader
                 avatar={
                     <Avatar
-                        alt={review.user.name}
-                        src={review.user.image || "https://via.placeholder.com/40"}
+                        alt={review?.user?.name}
+                        src={review?.user?.image || "https://via.placeholder.com/40"}
                         sx={{ width: 40, height: 40 }}
                     />
                 }
-                title={review.user.name}
+                title={review.user?.name || 'BUG: turetu but vardas'} 
                 subheader={formattedDate}
             />
             <CardContent>

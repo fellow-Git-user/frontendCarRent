@@ -27,7 +27,7 @@ const LoginPage: React.FC = () => {
 
             if(token){
                 loginUser(token)
-                navigate('/home/profile')
+                navigate('/home')
             }
 
             // navigate('/home/login')
