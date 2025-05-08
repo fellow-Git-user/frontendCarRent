@@ -42,16 +42,17 @@ export type UserFormProps = {
 }
 
 export interface SingleReviewProps {
-    review: 
-    _id?: string;
-    title: string;     
-    comment: string;     
-    rating: number;
-    user: {
-        name: string;
-        image: string;
+    review: {
+        _id: string;
+        title: string;
+        comment: string;
+        rating: number;
+        user: {
+            name: string;
+            image: string;
+        };
+        createdAt: string;
     };
-    createdAt: string;
 }
 
 export type ReviewFormValues = z.infer<typeof reviewFormSchema>;
