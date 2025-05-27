@@ -10,7 +10,6 @@ import LoginPage from './pages/LoginPage/LoginPage.tsx'
 import RegisterPage from './pages/RegisterPage/RegisterPage.tsx'
 import ProfilePage from './pages/ProfilePage/ProfilePage.tsx'
 import HomePage from './pages/HomePage/HomePage.tsx';
-import { useAuth } from './AuthContext.tsx';
 import PrivateRoute from './components/PrivateRoute.tsx';
 import AdminPage from './pages/AdminPage/AdminPage.tsx';
 import NavBar from './components/navbar/navbar.tsx';
@@ -21,9 +20,6 @@ import Footer from './pages/Footer/Footer.tsx';
 
 
 function App() {
-  const { user } = useAuth()
-
-
 
   return (
     <BrowserRouter>

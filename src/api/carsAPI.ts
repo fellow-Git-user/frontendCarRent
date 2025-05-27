@@ -55,7 +55,7 @@ export const createUser = async (newUserData: User): Promise<User> => {
 
 export const updateUser = async (updatedUserData: User): Promise<User> => {
     try {
-        const { data } = await apiUser.put(`/users/${updatedUserData.id}`, updatedUserData)
+        const { data } = await apiUser.put(`/users/${updatedUserData._id}`, updatedUserData)
         return data
     } catch {
         throw new Error ('smth went wrong')

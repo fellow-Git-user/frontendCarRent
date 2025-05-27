@@ -50,7 +50,7 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData, saveHandler} ) 
         image,
         name,
         surname,
-        phone: Number(phone),
+        phone,
         address: {
             street,
             flatNumber,
@@ -61,7 +61,7 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData, saveHandler} ) 
     }
 
     if(editUserData) {
-        const updatedUserData = {...newUser, id: editUserData.id}
+        const updatedUserData = {...newUser, _id: editUserData._id}
         saveHandler(updatedUserData)
 
     } else {

@@ -24,7 +24,7 @@ export type User = {
     image: string,
     name: string,
     surname: string,
-    phone: number,
+    phone: string,
     address: {
             street: string,
             flatNumber: string,
@@ -32,13 +32,15 @@ export type User = {
             country: string
         },
     email: string,
-    password: string,
-    role: string
+    password?: string,
+    role?: string,
+    exp?: number,
+    iat?: number
 }
 
 export type UserFormProps = {
-    editUserData: User | null,
-    saveHandler: (updatedUserData: User) => void
+    editUserData?: UserInfo | null,
+    saveHandler: (data: UpdatedUserData) => void
 }
 
 export interface SingleReviewProps {
@@ -62,10 +64,11 @@ export interface ReviewFormProps {
 }
 
 export interface UserInfo {
+    _id?: string;
     name: string;
     surname: string;
     email: string;
-    password: string;
+    password?: string;
     image: string;
     phone: string;
     address: {
@@ -74,6 +77,18 @@ export interface UserInfo {
         city: string;
         country: string;
     };
+}
+
+export type UpdatedUserData = Partial<UserInfo> & { _id: string }
+
+
+
+export interface AuthContextType {
+    user: User | null;
+    loading: boolean;
+    loginUser: (token: string) => void;
+    logoutUser: () => void;
+    updateUser: (changedData: Partial<User>) => void;
 }
 
 
