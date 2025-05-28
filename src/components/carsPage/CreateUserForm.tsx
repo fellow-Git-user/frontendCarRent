@@ -61,8 +61,14 @@ const CreateUserForm: React.FC<UserFormProps> = ( {editUserData, saveHandler} ) 
     }
 
     if(editUserData) {
-        const updatedUserData = {...newUser, _id: editUserData._id}
-        saveHandler(updatedUserData)
+        if(editUserData._id) {
+            const updatedUserData = {...newUser, _id: editUserData._id}
+            saveHandler(updatedUserData)
+        } else {
+                setError("Cannot save changes: User ID is missing for the update.");
+                console.error("Error: editUserData provided without _id for update.", editUserData);
+            }
+        
 
     } else {
         try {

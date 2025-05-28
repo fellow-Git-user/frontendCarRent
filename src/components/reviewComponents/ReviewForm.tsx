@@ -103,7 +103,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
                         <Rating
                             {...field}
                             value={field.value || 0} 
-                            onChange={(event, newValue) => {
+                            onChange={(_, newValue) => {
                                 field.onChange(newValue === null ? 0 : newValue); 
                             }}
                             precision={1} 

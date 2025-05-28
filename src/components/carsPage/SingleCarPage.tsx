@@ -2,7 +2,6 @@ import { useSingleCar } from "../../pages/SingleCar/SingleCarContext";
 import Carousel from 'react-bootstrap/Carousel';
 import React from 'react'; 
 import classes from "../../cssModules/SingleCarPage.module.css"
-import ReviewsComponent from "../reviewComponents/ReviewsComponent";
 
 
 
