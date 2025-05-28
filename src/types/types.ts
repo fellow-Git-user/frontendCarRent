@@ -100,7 +100,7 @@ export type NewUserData = Omit<User, '_id'>;
 export type UpdatedUserData = Partial<NewUserData> & { _id: string }
 
 export type UserFormProps = {
-    editUserData?: UserInfo,
+    editUserData?: UserInfo | null,
     saveHandler: (data: UpdatedUserData) => void
 }
 

@@ -9,7 +9,7 @@ import apiUser from "../../utils/apiUser"
 
 
 const ProfilePage: React.FC = () => {
-    const { user, loading, logoutUser, updateUser} = useAuth()
+    const { user, loading, updateUser} = useAuth()
 
     const [ name, setName ] = useState('')
     const [email, setEmail] = useState('')
@@ -22,14 +22,14 @@ const ProfilePage: React.FC = () => {
     const [city, setCity ] = useState('')
     const [country, setCountry ] = useState('')
 
-   
+   console.log(user)
 
 
     useEffect(() => {
         if (user) {
             setName(user.name)
             setEmail(user.email)
-            setPassword(user.password)
+            setPassword(user.password ?? '')
             setSurname(user.surname)
             setImage(user.image)
             setPhone(user.phone)
@@ -50,22 +50,22 @@ const ProfilePage: React.FC = () => {
         return <Navigate to={'/home/login'}/>
         }
 
-        const nameHandler = event => {
+        const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
             setName(event.target.value)
         }
-        const surnameHandler = event => setSurname(event?.target.value)
-        const imageHandler = event => setImage(event?.target.value)
-        const phoneHandler = event => setPhone(event?.target.value)
-        const streetHandler = event => setStreet(event?.target.value)
-        const flatNumberHandler = event => setFlatNumber(event?.target.value)
-        const cityHandler = event => setCity(event?.target.value)
-        const countryHandler = event => setCountry(event?.target.value)
-        const emailHandler = event => setEmail(event?.target.value)
-        const passwordHandler = event => setPassword(event?.target.value)
+        const surnameHandler = (event: React.ChangeEvent<HTMLInputElement>) => setSurname(event?.target.value)
+        const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => setImage(event?.target.value)
+        const phoneHandler = (event: React.ChangeEvent<HTMLInputElement>) => setPhone(event?.target.value)
+        const streetHandler = (event: React.ChangeEvent<HTMLInputElement>) => setStreet(event?.target.value)
+        const flatNumberHandler = (event: React.ChangeEvent<HTMLInputElement>) => setFlatNumber(event?.target.value)
+        const cityHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCity(event?.target.value)
+        const countryHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCountry(event?.target.value)
+        const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event?.target.value)
+        const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)
 
 
-        const submitHandler = async () => {
-            event?.preventDefault()
+        const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault()
             
             try { 
                 const { data } = await apiUser.put('/users/update', { 
@@ -83,16 +83,18 @@ const ProfilePage: React.FC = () => {
                 const { user } = data
 
                 updateUser(user)
+                alert('Profile updated successfully!')
             }
             catch (error) {
                 console.log(error)
+                alert('Failed to update profile. Please try again.')
             }
         }
 
     return (
         <div>
             <div>Profile page</div>
-            <p>Hello, {user.name} </p>
+            <p>Hello, {user?.name} </p>
 
 
             <Form onSubmit={submitHandler}>
