@@ -1,16 +1,13 @@
-import axios from "axios";
 import { useSingleUser } from "../../pages/SingleUser/SingleUserContextProvider"
 import React, { useState } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import { API_URL } from "../../utils/API_URL";
 import { Commet } from "react-loading-indicators";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import CreateUserForm from "./CreateUserForm";
-import { User } from "../../types/types";
-import { useAuth } from "../../AuthContext";
+import { UpdatedUserData, User } from "../../types/types";
 import apiUser from "../../utils/apiUser";
 
 
@@ -44,14 +41,18 @@ const SingleUserPage: React.FC = () => {
         return <Commet color="#5d5d5d" size="medium" text="" textColor="" />
     }
 
+    if (!user) {
+        return <Alert severity="error">User data not found.</Alert>;
+    }
+
     const deleteHandler = async () => {
         try {
-            const response = await apiUser.delete(`/users/${user?.id}`)
+            const response = await apiUser.delete(`/users/${user?._id}`)
         
             if(response.status === 200) {
                 setAlert(<Alert severity="success">Successfully deleted</Alert>)
                 setTimeout(() => {
-                    navigate(`/rent/users`);
+                    navigate(`/admin/users`);
                 }, 2000)            
             } else {
                 setAlert(<Alert severity="error">Something went wrong. Please try again or contact us.</Alert>) 
@@ -68,8 +69,25 @@ const SingleUserPage: React.FC = () => {
     //     await deleteUser(user.id)
     // } 
 
-    const onSaveHandler = (updatedUserData: User) => {
-        editUser(updatedUserData)
+    const onSaveHandler = (updatedPartialData: UpdatedUserData) => {
+
+        const fullUpdatedUser: User = {
+            _id: updatedPartialData._id,
+            image: updatedPartialData.image ?? user.image,
+            name: updatedPartialData.name ?? user.name,
+            surname: updatedPartialData.surname ?? user.surname,
+            phone: updatedPartialData.phone ?? user.phone,
+            email: updatedPartialData.email ?? user.email,
+            address: {
+                street: updatedPartialData.address?.street ?? user.address.street,
+                flatNumber: updatedPartialData.address?.flatNumber ?? user.address.flatNumber,
+                city: updatedPartialData.address?.city ?? user.address.city,
+                country: updatedPartialData.address?.country ?? user.address.country,
+            },
+            
+        };
+
+        editUser(fullUpdatedUser)
         setEditUserMode(false)
         setOpen(false)
     }
@@ -117,11 +135,11 @@ const SingleUserPage: React.FC = () => {
                 <p><strong>Email:</strong> {user?.email}</p>
                 <p><strong>Phone:</strong> {user?.phone}</p>
                 <p><strong>Address: </strong>
-                {user?.street}, 
-                Flat: {user?.flatNumber}, 
-                {user?.city}, {user?.country}
+                {user?.address?.street}, 
+                Flat: {user?.address?.flatNumber}, 
+                {user?.address?.city}, {user?.address?.country}
                 </p>
-                <Button variant="warning" onClick={editUserHandler}>Edit Profile</Button>
+                <Button variant="warning" onClick={editUserHandler}  className="me-1">Edit Profile</Button>
                 <Button variant="danger" onClick={deleteHandler}>Delete</Button>
                 {alert}
             </Col>

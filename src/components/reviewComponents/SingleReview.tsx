@@ -11,7 +11,7 @@ const SingleReview: React.FC<SingleReviewProps> = ({ review }) => {
     );
 
     return (
-        <Card sx={{ mb: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <Card sx={{ mb: 2, boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
             <CardHeader
                 avatar={
                     <Avatar
@@ -29,7 +29,7 @@ const SingleReview: React.FC<SingleReviewProps> = ({ review }) => {
                 </Typography>
                 <Rating value={review.rating} readOnly precision={1} sx={{ mb: 1 }} />
                 <Typography variant="body2" color="text.secondary">
-                    {review.comment}  
+                    {review.comment || review.body}  
                 </Typography>
             </CardContent>
         </Card>

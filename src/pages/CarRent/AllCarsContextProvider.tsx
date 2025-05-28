@@ -3,6 +3,7 @@ import { Car } from "../../types/types"
 
 import { carReducer, CartActionTypes, CartState, initialState } from "./allCarsReducer"
 import { fetchCars } from "../../api/carsAPI"
+import { Alert } from "@mui/material"
 
 type CarsContextProviderProps = {
     children: ReactNode
@@ -13,6 +14,7 @@ interface CarsContextType extends CartState {
     removeProduct: (_id: Car['_id']) => void
     clearCart: () => void
     updateQuantity: (_id: Car['_id'], quantity: number) => void
+    error: string | null;
 }
 
 
@@ -23,7 +25,7 @@ export const CarsContextProvider: React.FC<CarsContextProviderProps> = ({ childr
     const [state, dispatch] = useReducer(carReducer, initialState)
     const { cart, carsList, loading} = state
 
-    const [ error, setError ] = useState('')
+    const [ error, setError ] = useState<string | null >(null)
 
 
     
@@ -35,9 +37,10 @@ export const CarsContextProvider: React.FC<CarsContextProviderProps> = ({ childr
                 const carsData = await fetchCars()
                 dispatch({ type: CartActionTypes.GET_DATA, payload: carsData })
                 dispatch({ type: CartActionTypes.LOADING, payload: false})
-            } catch (error: any) {
-                setError(error)
-                console.log('Failed to fetch cars', error);
+            } catch (err: any) {
+                setError(err.message || 'Failed to fetch cars.')
+                console.log('Failed to fetch cars', err)
+                dispatch({ type: CartActionTypes.LOADING, payload: false })
             }
             
         }
@@ -57,12 +60,14 @@ export const CarsContextProvider: React.FC<CarsContextProviderProps> = ({ childr
         addProduct,
         removeProduct,
         clearCart,
-        updateQuantity
+        updateQuantity,
+        error
         }
     
 
     return (
         <CarsContext.Provider value={ctxValue}>
+            {error && <Alert severity="error">{error}</Alert>}
             {children}
 
         </CarsContext.Provider>

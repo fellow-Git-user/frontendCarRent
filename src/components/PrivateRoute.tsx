@@ -8,10 +8,10 @@ const PrivateRoute: React.FC = () => {
     const { user, loading, logoutUser } = useAuth()
 
   useEffect(() => {
-    if (user && user.exp * 1000 < Date.now()) {
+    if (user && user.exp && user.exp * 1000 < Date.now()) {
       logoutUser();
     }
-  }, [user, logoutUser]); // Depend on user and logoutUser
+  }, [user, logoutUser]);
 
   if(loading) {
     return <Commet color="#5d5d5d" size="medium" text="" textColor="" />

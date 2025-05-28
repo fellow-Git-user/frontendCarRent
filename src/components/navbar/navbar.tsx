@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router';
-import { AppBar, Toolbar, Box, Typography } from '@mui/material'; 
+import { AppBar, Toolbar, Box } from '@mui/material'; 
 import { User, KeyRound, Car, Users, LogIn } from 'lucide-react';
 import { useAuth } from '../../AuthContext.tsx';
 import ROLES from '../../config/roles.tsx';
-import LogoutButton from '../buttons/logoutButton.tsx';
+import LogoutButton from '../buttons/LogoutButton.tsx';
 
 
 const NavBar = () => {
-    const {logoutUser, user} = useAuth()
+    const { user } = useAuth()
      
 
   return (

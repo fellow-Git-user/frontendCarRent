@@ -9,14 +9,32 @@ export type Car = {
     transmission: string
     passengerSeats: number
     price: number,
-    albums?: {
-        brand: string
-        model: string
-        firstImage: string
-        secondImage: string
-        thirdImage: string
-    },
-    reviews: string[]
+    albums?: CarAlbum[],
+    reviews: Review[]
+}
+
+export interface Review {
+    _id: string;
+    title: string;
+    comment: string; 
+    body: string;
+    rating: number;
+    user: {
+        name: string;
+        image: string;
+    };
+    createdAt: string;
+    car: string;
+}
+
+export interface CarAlbum {
+    _id: string,
+    carBrand: string,
+    carModel: string,
+    carManufactureDate: string,
+    firstImage: string,
+    secondImage: string,
+    thirdImage: string
 }
 
 export type User = {
@@ -24,7 +42,7 @@ export type User = {
     image: string,
     name: string,
     surname: string,
-    phone: number,
+    phone: string,
     address: {
             street: string,
             flatNumber: string,
@@ -32,39 +50,41 @@ export type User = {
             country: string
         },
     email: string,
-    password: string,
-    role: string
+    password?: string,
+    role?: string,
+    exp?: number,
+    iat?: number
 }
 
-export type UserFormProps = {
-    editUserData: User | null,
-    saveHandler: (updatedUserData: User) => void
-}
+
 
 export interface SingleReviewProps {
-    review: 
-    _id?: string;
-    title: string;     
-    comment: string;     
-    rating: number;
-    user: {
-        name: string;
-        image: string;
-    };
-    createdAt: string;
+    review: Review
 }
 
-export type ReviewFormValues = z.infer<typeof reviewFormSchema>;
+export type ReviewFormValues = {
+    title: string;
+    body: string;
+    comment: string;
+    rating: number;
+};
 
 export interface ReviewFormProps {
     onSubmit: (data: ReviewFormValues) => void;
 }
 
+export interface ReviewsListProps {
+    reviews: Review[];
+    loading: boolean;
+    error: string | null;
+}
+
 export interface UserInfo {
+    _id?: string;
     name: string;
     surname: string;
     email: string;
-    password: string;
+    password?: string;
     image: string;
     phone: string;
     address: {
@@ -73,6 +93,25 @@ export interface UserInfo {
         city: string;
         country: string;
     };
+}
+
+export type NewUserData = Omit<User, '_id'>;
+
+export type UpdatedUserData = Partial<NewUserData> & { _id: string }
+
+export type UserFormProps = {
+    editUserData?: UserInfo | null,
+    saveHandler: (data: UpdatedUserData) => void
+}
+
+
+
+export interface AuthContextType {
+    user: User | null;
+    loading: boolean;
+    loginUser: (token: string) => void;
+    logoutUser: () => void;
+    updateUser: (changedData: Partial<User>) => void;
 }
 
 

@@ -1,52 +1,50 @@
-import React, { useEffect, useState } from 'react';
 import { Commet } from "react-loading-indicators";
-import { useSingleCar } from "../../pages/SingleCar/SingleCarContext";
 import { Grid2, Typography } from '@mui/material';
 import SingleReview from './SingleReview'; // Import the SingleReview component
-import apiUser from '../../utils/apiUser';
+import { ReviewsListProps } from '@/types/types';
 
 
 
-const ReviewsList: React.FC = () => {
-    const { car, loading } = useSingleCar();
-    const [reviewsData, setReviewsData, ] = useState<any[] | null>(null);
-    const [localLoading, setLocalLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+const ReviewsList: React.FC<ReviewsListProps> = ({ reviews, loading, error }) => {
+    // const { car, loading } = useSingleCar();
+    // const [reviewsData, setReviewsData, ] = useState<any[] | null>(null);
+    // const [localLoading, setLocalLoading] = useState(false);
+    // const [error, setError] = useState<string | null>(null);
 
 
-    useEffect(() => {
-        if (car && car._id) {
-            setLocalLoading(true)
-            setError(null)
+    // useEffect(() => {
+    //     if (car && car._id) {
+    //         setLocalLoading(true)
+    //         setError(null)
 
-            const fetchReviews = async () => {
-                try {
-                    const response = await apiUser.get(`/cars/${car._id}/reviews`)
+    //         const fetchReviews = async () => {
+    //             try {
+    //                 const response = await apiUser.get(`/cars/${car._id}/reviews`)
                     
-                    if(response.status < 200 || response.status >= 300){
-                        throw new Error(`Failed to fetch reviews: ${response.status} - ${response.statusText}`);
-                    }
+    //                 if(response.status < 200 || response.status >= 300){
+    //                     throw new Error(`Failed to fetch reviews: ${response.status} - ${response.statusText}`);
+    //                 }
 
-                    if (response.data.message === "This car has 0 reviews") {
-                        setReviewsData([])
-                    } else {
-                        setReviewsData(response.data)
-                    }
+    //                 if (response.data.message === "This car has 0 reviews") {
+    //                     setReviewsData([])
+    //                 } else {
+    //                     setReviewsData(response.data)
+    //                 }
 
-                } catch (error: any) {
-                    setError(error.message)
-                    setReviewsData(null);
-                } finally {
-                    setLocalLoading(false)
-                }
+    //             } catch (error: any) {
+    //                 setError(error.message)
+    //                 setReviewsData(null);
+    //             } finally {
+    //                 setLocalLoading(false)
+    //             }
             
-            } 
-            fetchReviews()
-        }
+    //         } 
+    //         fetchReviews()
+    //     }
             
-    }, [car])
+    // }, [car])
 
-    if (loading || localLoading) {
+    if (loading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
                 <Commet color="#5d5d5d" size="medium" text="Loading reviews..." textColor="#5d5d5d" />
@@ -62,11 +60,11 @@ const ReviewsList: React.FC = () => {
         );
     }
 
-    if (!reviewsData || reviewsData.length === 0) {
+    if (!reviews || reviews.length === 0) {
         return (
             <div style={{ marginTop: '16px', textAlign: 'center' }}>
                 <Typography variant="body2" color="text.secondary">
-                    No reviews yet.
+                    No reviews yet. Be the first to review!
                 </Typography>
             </div>
         );
@@ -78,8 +76,8 @@ const ReviewsList: React.FC = () => {
                 Reviews
             </Typography>
             <Grid2 container spacing={4}> 
-                {reviewsData.map(review => (
-                    <Grid2 key={review._id}> 
+                {reviews.map(review => (
+                    <Grid2 key={review._id} size={{xs:12, sm:6, md:4, lg:3}}> 
                         <SingleReview review={review} />
                     </Grid2>
                 ))}

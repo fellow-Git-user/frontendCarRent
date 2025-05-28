@@ -2,21 +2,30 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useAuth } from "../../AuthContext"
+import { Alert } from "@mui/material"
 
 const LoginPage: React.FC = () => {
     const { loginUser } = useAuth()
     
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loginError, setLoginError] = useState<string | null>(null)
+
 
     const navigate = useNavigate()
 
-    const emailHandler = event => setEmail(event?.target.value)
-    const passwordHandler = event => setPassword(event?.target.value)
+    const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value)
+        setLoginError(null)
+    }
+    const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value)
+        setLoginError(null)
+    }
 
-    const loginHandler = async event => {
+    const loginHandler = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        
+        setLoginError(null)
         
         try {
             const loginInfo = { email, password}
@@ -28,12 +37,18 @@ const LoginPage: React.FC = () => {
             if(token){
                 loginUser(token)
                 navigate('/home')
+            } else {
+                setLoginError("Login failed: No token received.")
             }
 
             // navigate('/home/login')
         } catch (error) {
             console.log('Failed to login', error)
-            return <p>{error}</p>
+            if (axios.isAxiosError(error) && error.response) {
+                setLoginError(error.response.data.message || 'Login failed. Please check your credentials.');
+            } else {
+                setLoginError('An unexpected error occurred during login.');
+            }
         }
 
     }   
@@ -51,6 +66,9 @@ const LoginPage: React.FC = () => {
                     <label htmlFor="password"  >Password: </label>
                     <input type="password" name="password" id="password" value={password} onChange={passwordHandler} />
                 </div>
+
+                {loginError && <Alert severity="warning">{loginError}</Alert> }
+
 
                 <button type="submit">Login</button>
             </form>
