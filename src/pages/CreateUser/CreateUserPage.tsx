@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap"
 import CreateUserForm from "../../components/carsPage/CreateUserForm"
+import { UpdatedUserData } from "@/types/types";
 
 
 const CreateUserPage: React.FC = () => {

@@ -65,7 +65,6 @@ export interface SingleReviewProps {
 export type ReviewFormValues = {
     title: string;
     body: string;
-    comment: string;
     rating: number;
 };
 

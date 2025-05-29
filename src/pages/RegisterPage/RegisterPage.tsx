@@ -1,10 +1,10 @@
-import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useAuth } from "../../AuthContext"
 import apiUser from "../../utils/apiUser"
 import { UserInfo } from "../../types/types"
 import { jwtDecode } from "jwt-decode"
+import { Alert } from "@mui/material"
 
 const RegisterPage: React.FC = () => {
     const { loginUser } = useAuth()
@@ -39,7 +39,7 @@ const RegisterPage: React.FC = () => {
 
     const registerHandler = async (event: React.FormEvent)  => {
         event.preventDefault()
-        
+        setError(null)
         
             const userInfo: UserInfo = {
                 name,
@@ -61,6 +61,7 @@ const RegisterPage: React.FC = () => {
                 if (res.status >= 200 && res.status < 300) {
                     const token = res.data.token;
                     const decoded = jwtDecode(token);
+                    console.log('Decoded Token:', decoded);
                     loginUser(token);
                     navigate('/home/profile');
                 } else {
@@ -79,6 +80,9 @@ const RegisterPage: React.FC = () => {
             <h1>Register Page</h1>
 
             <form onSubmit={registerHandler}>
+
+                {error && <Alert severity="warning">{error}</Alert>}
+
                 <div className="form-control">
                     <label htmlFor="name" >Name: </label>
                     <input type="text" name="name" id="name" value={name} onChange={nameHandler} />
