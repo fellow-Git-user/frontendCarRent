@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';

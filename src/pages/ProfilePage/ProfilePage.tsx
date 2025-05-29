@@ -33,10 +33,10 @@ const ProfilePage: React.FC = () => {
             setSurname(user.surname)
             setImage(user.image)
             setPhone(user.phone)
-            setStreet(user.street)
-            setFlatNumber(user.flatNumber)
-            setCity(user.city)
-            setCountry(user.country)
+            setStreet(user.address.street)
+            setFlatNumber(user.address.flatNumber)
+            setCity(user.address.city)
+            setCountry(user.address.country)
         }
     }, [user])
 
